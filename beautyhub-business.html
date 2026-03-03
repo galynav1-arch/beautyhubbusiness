@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeautyHub Business</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #0D0B09;
+  --bg2:     #161310;
+  --bg3:     #1F1B17;
+  --bg4:     #2A2520;
+  --border:  rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.11);
+  --gold:    #C9A96E;
+  --gold2:   #E8C88A;
+  --gold-bg: rgba(201,169,110,0.1);
+  --rose:    #CC6070;
+  --rose-bg: rgba(204,96,112,0.12);
+  --sage:    #6FAF88;
+  --sage-bg: rgba(111,175,136,0.1);
+  --sky:     #5A9FD4;
+  --sky-bg:  rgba(90,159,212,0.1);
+  --amber:   #D4905A;
+  --amber-bg:rgba(212,144,90,0.1);
+  --violet:  #9B7FD4;
+  --violet-bg:rgba(155,127,212,0.1);
+  --text:    #EDE8E0;
+  --text2:   #9A8870;
+  --text3:   #5C5044;
+  --grad-gold: linear-gradient(135deg,#C9A96E,#8B6535);
+  --grad-rose: linear-gradient(135deg,#CC6070,#9B3A4A);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:radial-gradient(ellipse at 20% 0%,#1C1510 0%,#0D0B09 55%);
+  min-height:100vh;display:flex;justify-content:center;align-items:flex-start;
+  font-family:'DM Sans',sans-serif;padding:40px 20px 80px;gap:32px;
+  flex-wrap:wrap;
+}
+
+/* ─── TWO PHONES SIDE BY SIDE ─── */
+.phone-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
+.phone-label{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);
+  display:flex;align-items:center;gap:8px;
+}
+.phone-label::before,.phone-label::after{content:'';flex:1;height:1px;background:var(--border2);width:40px;}
+
+.phone{
+  width:375px;height:812px;background:var(--bg);border-radius:50px;
+  overflow:hidden;position:relative;flex-shrink:0;
+  box-shadow:0 0 0 1px rgba(201,169,110,.12),0 0 0 4px rgba(13,11,9,.95),0 60px 120px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.04);
+}
+.notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:124px;height:30px;background:#000;border-radius:0 0 18px 18px;z-index:9999;display:flex;align-items:center;justify-content:center;}
+.notch-cam{width:8px;height:8px;background:#080604;border-radius:50%;border:1px solid #181410;}
+
+.screen{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .3s;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;}
+.screen::-webkit-scrollbar{display:none;}
+.screen.active{opacity:1;pointer-events:all;}
+
+/* ─── STATUS BAR ─── */
+.sb{height:44px;padding:14px 22px 0;display:flex;justify-content:space-between;font-size:11px;color:var(--text3);flex-shrink:0;}
+
+/* ─── BOTTOM NAV ─── */
+.bnav{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:10px 0 26px;z-index:200;}
+.ni{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;opacity:.3;transition:all .2s;min-width:52px;}
+.ni.on{opacity:1;}
+.ni .ic{font-size:20px;line-height:1;}
+.ni .lb{font-size:8px;letter-spacing:.8px;color:var(--text2);text-transform:uppercase;margin-top:1px;}
+.ni.on .lb{color:var(--gold);font-weight:600;}
+.ndot{width:3px;height:3px;background:var(--gold);border-radius:50%;}
+
+/* ─── CARDS ─── */
+.card{background:var(--bg2);border-radius:18px;border:1px solid var(--border);}
+.card-press{transition:all .2s;cursor:pointer;}
+.card-press:hover{border-color:var(--border2);transform:translateY(-1px);}
+
+/* ─── SECTIONS ─── */
+.sec{padding:20px 20px 0;}
+.sec-hdr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;}
+.sh-title{font-family:'Playfair Display',serif;font-size:16px;color:var(--text);}
+.sh-link{font-size:10px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;opacity:.8;}
+
+/* ─── BADGES / PILLS ─── */
+.badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.3px;}
+.badge.gold{background:var(--gold-bg);color:var(--gold);}
+.badge.rose{background:var(--rose-bg);color:var(--rose);}
+.badge.sage{background:var(--sage-bg);color:var(--sage);}
+.badge.sky{background:var(--sky-bg);color:var(--sky);}
+.badge.amber{background:var(--amber-bg);color:var(--amber);}
+.badge.violet{background:var(--violet-bg);color:var(--violet);}
+
+/* ─── BUTTONS ─── */
+.btn{border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:all .2s;display:inline-flex;align-items:center;justify-content:center;gap:6px;}
+.btn-gold{background:var(--grad-gold);color:var(--bg);border-radius:14px;padding:14px 20px;font-size:13px;letter-spacing:.5px;box-shadow:0 6px 20px rgba(201,169,110,.25);}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(201,169,110,.35);}
+.btn-outline{background:transparent;border:1px solid var(--border2);color:var(--text2);border-radius:12px;padding:10px 16px;font-size:12px;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.btn-ghost{background:var(--bg3);color:var(--text2);border-radius:12px;padding:10px 16px;font-size:12px;border:none;}
+
+/* ─── STAT TILES ─── */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.stat-tile{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:16px;}
+.stat-tile .st-label{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.stat-tile .st-val{font-family:'Playfair Display',serif;font-size:28px;color:var(--text);line-height:1;}
+.stat-tile .st-sub{font-size:11px;margin-top:5px;}
+.stat-tile .st-sub.up{color:var(--sage);}
+.stat-tile .st-sub.down{color:var(--rose);}
+
+/* ─── AVATAR ─── */
+.ava{border-radius:50%;object-fit:cover;border:2px solid var(--bg4);}
+.ava-sm{width:34px;height:34px;}
+.ava-md{width:46px;height:46px;}
+.ava-lg{width:64px;height:64px;}
+
+/* ─── INPUT ─── */
+.inp{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);outline:none;width:100%;transition:border-color .2s;}
+.inp::placeholder{color:var(--text3);}
+.inp:focus{border-color:rgba(201,169,110,.35);}
+.inp-label{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+
+/* ─── DIVIDER ─── */
+.div{height:1px;background:var(--border);margin:0 20px;}
+
+/* ─── SCROLL ROW ─── */
+.hscroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}
+.hscroll::-webkit-scrollbar{display:none;}
+
+/* ═══════════════════════════════════════════
+   ███████╗  █████╗  ██╗      ██████╗ ███╗   ██╗
+   ██╔════╝ ██╔══██╗ ██║     ██╔═══██╗████╗  ██║
+   ███████╗ ███████║ ██║     ██║   ██║██╔██╗ ██║
+   ╚════██║ ██╔══██║ ██║     ██║   ██║██║╚██╗██║
+   ███████║ ██║  ██║ ███████╗╚██████╔╝██║ ╚████║
+   ═══════════════════════════════════════════ */
+
+/* ── SALON SPLASH ── */
+#s-splash{background:var(--bg);display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 48px;}
+.ss-hero{
+  height:320px;position:relative;overflow:hidden;
+  background:url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=750&q=80') center/cover;
+}
+.ss-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,11,9,.1) 0%,rgba(13,11,9,.85) 100%);}
+.ss-hero-content{position:absolute;bottom:24px;left:24px;right:24px;z-index:1;}
+.ss-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(201,169,110,.15);backdrop-filter:blur(10px);border:1px solid rgba(201,169,110,.2);padding:6px 12px;border-radius:20px;margin-bottom:12px;}
+.ss-tag-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;}
+.ss-tag-txt{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);}
+.ss-salon-name{font-family:'Playfair Display',serif;font-size:32px;color:var(--text);line-height:1.1;}
+.ss-salon-name em{font-style:italic;color:var(--gold2);}
+.ss-salon-sub{font-size:12px;color:var(--text2);margin-top:4px;}
+.ss-actions{padding:24px 24px 0;display:flex;flex-direction:column;gap:10px;}
+.ss-actions .btn-gold{width:100%;padding:17px;}
+.ss-or{text-align:center;font-size:11px;color:var(--text3);letter-spacing:1px;}
+.ss-actions .btn-outline{width:100%;padding:15px;}
+
+/* ── SALON DASHBOARD ── */
+#s-dash{background:var(--bg);}
+.s-dash-hdr{padding:44px 20px 20px;background:var(--bg2);border-bottom:1px solid var(--border);}
+.sdh-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+.sdh-greeting{font-family:'Playfair Display',serif;font-size:24px;color:var(--text);}
+.sdh-greeting em{font-style:italic;color:var(--gold);}
+.sdh-date{font-size:11px;color:var(--text3);margin-top:2px;}
+.notification-btn{width:38px;height:38px;background:var(--bg3);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;border:1px solid var(--border);}
+.notif-badge{position:absolute;top:7px;right:7px;width:8px;height:8px;background:var(--rose);border-radius:50%;border:1.5px solid var(--bg2);}
+
+/* Today summary row */
+.today-row{display:flex;gap:8px;}
+.today-pill{flex:1;background:var(--bg3);border-radius:13px;padding:12px;text-align:center;border:1px solid var(--border);}
+.today-pill .tp-val{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);}
+.today-pill .tp-lbl{font-size:9px;color:var(--text3);letter-spacing:.8px;text-transform:uppercase;margin-top:3px;}
+
+/* Appointment cards */
+.appt-card{
+  background:var(--bg2);border-radius:16px;border:1px solid var(--border);
+  padding:14px 15px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;
+  transition:all .2s;
+}
+.appt-card:hover{border-color:var(--border2);}
+.appt-time{text-align:center;min-width:42px;}
+.appt-time .at-h{font-family:'Playfair Display',serif;font-size:16px;color:var(--text);}
+.appt-time .at-m{font-size:9px;color:var(--text3);margin-top:-2px;}
+.appt-divider{width:2px;height:36px;border-radius:1px;background:var(--border2);}
+.appt-divider.gold{background:var(--gold);opacity:.5;}
+.appt-divider.rose{background:var(--rose);opacity:.5;}
+.appt-divider.sage{background:var(--sage);opacity:.5;}
+.appt-info{flex:1;}
+.appt-client{font-size:13px;color:var(--text);font-weight:500;}
+.appt-detail{font-size:11px;color:var(--text2);margin-top:2px;}
+.appt-meta{text-align:right;}
+.appt-price{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);}
+.appt-master{font-size:10px;color:var(--text3);margin-top:2px;}
+
+/* Revenue mini chart */
+.rev-chart{background:var(--bg2);border-radius:18px;border:1px solid var(--border);padding:18px 18px 14px;margin-bottom:10px;}
+.rc-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
+.rc-val{font-family:'Playfair Display',serif;font-size:30px;color:var(--text);}
+.rc-lbl{font-size:11px;color:var(--text3);margin-top:2px;}
+.rc-change{font-size:11px;color:var(--sage);background:var(--sage-bg);padding:4px 9px;border-radius:10px;}
+.bars{display:flex;align-items:flex-end;gap:5px;height:56px;}
+.bar{flex:1;border-radius:4px 4px 0 0;transition:all .2s;cursor:pointer;}
+.bar:hover{filter:brightness(1.2);}
+.bar-labels{display:flex;gap:5px;margin-top:5px;}
+.bar-lbl{flex:1;text-align:center;font-size:8px;color:var(--text3);}
+
+/* ── SALON CALENDAR ── */
+#s-calendar{background:var(--bg);}
+.s-cal-hdr{padding:44px 20px 18px;background:var(--bg2);border-bottom:1px solid var(--border);}
+.cal-week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:16px;}
+.cw-day{text-align:center;padding:8px 4px;border-radius:12px;cursor:pointer;transition:all .15s;}
+.cw-day .wd{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;}
+.cw-day .wn{font-family:'Playfair Display',serif;font-size:18px;color:var(--text);margin-top:2px;}
+.cw-day.on{background:var(--gold-bg);border:1px solid rgba(201,169,110,.25);}
+.cw-day.on .wn{color:var(--gold);}
+.cw-day.today .wn{color:var(--gold2);}
+.cw-dot{display:flex;justify-content:center;gap:2px;margin-top:3px;}
+.cdot{width:3px;height:3px;border-radius:50%;}
+.cdot.g{background:var(--gold);}
+.cdot.r{background:var(--rose);}
+.cdot.s{background:var(--sage);}
+
+/* Timeline */
+.timeline{padding:0 20px;}
+.tl-row{display:flex;gap:12px;margin-bottom:8px;align-items:stretch;}
+.tl-time{width:38px;padding-top:14px;font-size:10px;color:var(--text3);text-align:right;flex-shrink:0;}
+.tl-line{width:1px;background:var(--border);flex-shrink:0;position:relative;}
+.tl-line::before{content:'';position:absolute;top:18px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--bg4);}
+.tl-slot{flex:1;min-height:52px;}
+.tl-block{
+  border-radius:12px;padding:10px 12px;margin-bottom:4px;cursor:pointer;transition:all .15s;
+  border-left:3px solid;
+}
+.tl-block:hover{filter:brightness(1.1);}
+.tl-block.gold{background:var(--gold-bg);border-color:var(--gold);}
+.tl-block.rose{background:var(--rose-bg);border-color:var(--rose);}
+.tl-block.sage{background:var(--sage-bg);border-color:var(--sage);}
+.tl-block.sky{background:var(--sky-bg);border-color:var(--sky);}
+.tl-block .tb-client{font-size:12px;font-weight:500;color:var(--text);}
+.tl-block .tb-svc{font-size:10px;color:var(--text2);margin-top:2px;}
+.tl-block .tb-master{font-size:10px;margin-top:4px;opacity:.7;}
+.tl-empty{height:52px;border:1px dashed var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.tl-empty span{font-size:10px;color:var(--text3);}
+
+/* ── SALON SERVICES ── */
+#s-services{background:var(--bg);}
+.s-svc-hdr{padding:44px 20px 18px;background:var(--bg2);border-bottom:1px solid var(--border);}
+.svc-cat{margin-bottom:10px;}
+.svc-cat-name{font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin:16px 0 8px;}
+.svc-row{
+  background:var(--bg2);border-radius:14px;border:1px solid var(--border);
+  padding:13px 14px;margin-bottom:6px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .15s;
+}
+.svc-row:hover{border-color:var(--border2);}
+.svc-row .sr-ico{font-size:20px;width:36px;height:36px;background:var(--bg3);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.svc-row .sr-info{flex:1;}
+.svc-row .sr-name{font-size:13px;color:var(--text);font-weight:500;}
+.svc-row .sr-meta{font-size:10px;color:var(--text3);margin-top:2px;}
+.svc-row .sr-price{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);}
+.svc-row .sr-edit{font-size:16px;color:var(--text3);cursor:pointer;padding:4px;}
+.add-svc-btn{
+  width:calc(100% - 40px);margin:16px 20px 0;padding:14px;
+  background:var(--bg3);border:1px dashed var(--border2);border-radius:14px;
+  color:var(--text2);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;
+}
+.add-svc-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ── SALON TEAM ── */
+#s-team{background:var(--bg);}
+.s-team-hdr{padding:44px 20px 18px;background:var(--bg2);border-bottom:1px solid var(--border);}
+.team-card{
+  background:var(--bg2);border-radius:18px;border:1px solid var(--border);
+  padding:16px;margin-bottom:10px;cursor:pointer;transition:all .2s;
+}
+.team-card:hover{border-color:var(--border2);}
+.tc-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.tc-info{flex:1;}
+.tc-name{font-size:14px;font-weight:600;color:var(--text);}
+.tc-role{font-size:11px;color:var(--text3);margin-top:2px;}
+.tc-status{display:flex;align-items:center;gap:4px;font-size:10px;}
+.tc-status.active{color:var(--sage);}
+.tc-status.busy{color:var(--amber);}
+.tc-sdot{width:6px;height:6px;border-radius:50%;}
+.tc-status.active .tc-sdot{background:var(--sage);}
+.tc-status.busy .tc-sdot{background:var(--amber);}
+.tc-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.tc-stat{background:var(--bg3);border-radius:10px;padding:8px;text-align:center;}
+.tc-stat .tsv{font-family:'Playfair Display',serif;font-size:16px;color:var(--text);}
+.tc-stat .tsl{font-size:9px;color:var(--text3);margin-top:2px;}
+.tc-today{padding:10px 12px;background:var(--bg3);border-radius:10px;font-size:11px;color:var(--text2);display:flex;justify-content:space-between;margin-top:8px;}
+
+/* ── SALON STATS ── */
+#s-stats{background:var(--bg);}
+.s-stats-hdr{padding:44px 20px 18px;background:var(--bg2);border-bottom:1px solid var(--border);}
+.period-tabs{display:flex;gap:6px;margin-top:14px;}
+.ptab{padding:7px 16px;border-radius:20px;font-size:11px;cursor:pointer;transition:all .15s;border:1px solid var(--border);}
+.ptab:not(.on){color:var(--text3);}
+.ptab.on{background:var(--gold-bg);border-color:rgba(201,169,110,.3);color:var(--gold);font-weight:600;}
+.big-stat{background:var(--bg2);border-radius:20px;border:1px solid var(--border);padding:20px;margin-bottom:10px;}
+.bs-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
+.bs-label{font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;}
+.bs-value{font-family:'Playfair Display',serif;font-size:36px;color:var(--text);}
+.bs-change{font-size:12px;}
+.bs-change.up{color:var(--sage);}
+.bs-change.down{color:var(--rose);}
+/* sparkline */
+.sparkline{height:48px;display:flex;align-items:flex-end;gap:3px;}
+.spark{flex:1;border-radius:3px 3px 0 0;background:var(--bg4);transition:height .3s;}
+.spark.hi{background:linear-gradient(to top,#8B6535,#C9A96E);}
+.top-services{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.ts-item{background:var(--bg2);border-radius:14px;border:1px solid var(--border);padding:12px;}
+.ts-item .tsi-name{font-size:12px;color:var(--text);font-weight:500;margin-bottom:6px;}
+.ts-item .tsi-bar{height:3px;background:var(--bg4);border-radius:2px;margin-bottom:5px;}
+.ts-item .tsi-fill{height:100%;border-radius:2px;}
+.ts-item .tsi-meta{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);}
+
+/* ── SALON CHAT ── */
+#s-chat{background:var(--bg);}
+.s-chat-hdr{padding:44px 20px 18px;background:var(--bg2);border-bottom:1px solid var(--border);}
+.chat-list-item{
+  padding:14px 20px;display:flex;align-items:center;gap:12px;cursor:pointer;
+  border-bottom:1px solid var(--border);transition:background .15s;
+}
+.chat-list-item:hover{background:var(--bg2);}
+.cli-av{position:relative;flex-shrink:0;}
+.cli-badge{position:absolute;top:-2px;right:-2px;width:14px;height:14px;background:var(--rose);border-radius:50%;border:2px solid var(--bg);display:flex;align-items:center;justify-content:center;font-size:7px;color:#fff;font-weight:700;}
+.cli-info{flex:1;min-width:0;}
+.cli-name{font-size:13px;font-weight:500;color:var(--text);}
+.cli-preview{font-size:11px;color:var(--text3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cli-meta{text-align:right;flex-shrink:0;}
+.cli-time{font-size:10px;color:var(--text3);}
+.cli-unread{margin-top:4px;background:var(--rose);color:#fff;border-radius:10px;padding:1px 7px;font-size:9px;font-weight:700;display:inline-block;}
+
+/* Chat conversation */
+#s-chat-conv{background:var(--bg);}
+.chat-conv-hdr{
+  padding:44px 20px 14px;background:var(--bg2);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+.chat-back{width:34px;height:34px;background:var(--bg3);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--text2);border:none;}
+.chat-contact{flex:1;}
+.chat-contact-name{font-size:14px;font-weight:600;color:var(--text);}
+.chat-contact-status{font-size:11px;color:var(--sage);margin-top:1px;}
+.chat-msgs{padding:16px 20px;display:flex;flex-direction:column;gap:10px;}
+.msg{max-width:78%;animation:fadeUp .2s ease both;}
+.msg.in{align-self:flex-start;}
+.msg.out{align-self:flex-end;}
+.msg-bubble{padding:11px 14px;border-radius:18px;font-size:13px;line-height:1.45;}
+.msg.in .msg-bubble{background:var(--bg3);color:var(--text);border-radius:4px 18px 18px 18px;}
+.msg.out .msg-bubble{background:var(--gold-bg);border:1px solid rgba(201,169,110,.2);color:var(--text);border-radius:18px 4px 18px 18px;}
+.msg-time{font-size:9px;color:var(--text3);margin-top:3px;padding:0 4px;}
+.msg.out .msg-time{text-align:right;}
+.chat-input-bar{
+  position:sticky;bottom:0;background:var(--bg2);border-top:1px solid var(--border);
+  padding:12px 16px 28px;display:flex;gap:8px;align-items:center;
+}
+.chat-input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:24px;padding:10px 16px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);outline:none;}
+.chat-send{width:40px;height:40px;background:var(--grad-gold);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;border:none;}
+
+/* ── SALON PROFILE ── */
+#s-profile{background:var(--bg);}
+.s-prof-hdr{
+  height:200px;position:relative;overflow:hidden;
+  background:url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=750&q=80') center/cover;
+}
+.s-prof-hdr::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,11,9,.3),rgba(13,11,9,.75));}
+.prof-hdr-content{position:absolute;bottom:18px;left:20px;right:20px;z-index:1;display:flex;align-items:flex-end;gap:14px;}
+.prof-logo{width:64px;height:64px;background:linear-gradient(135deg,#1A1714,#2A2520);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;border:2px solid var(--border2);flex-shrink:0;}
+.prof-name-block .pn{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);}
+.prof-name-block .ps{font-size:11px;color:var(--text2);margin-top:2px;}
+.prof-edit-btn{margin-left:auto;background:rgba(201,169,110,.15);backdrop-filter:blur(8px);border:1px solid rgba(201,169,110,.2);color:var(--gold);padding:7px 14px;border-radius:12px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.5px;}
+.prof-stats-row{display:flex;gap:0;background:var(--bg2);border-bottom:1px solid var(--border);}
+.ps-cell{flex:1;padding:14px;text-align:center;border-right:1px solid var(--border);}
+.ps-cell:last-child{border-right:none;}
+.ps-val{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);}
+.ps-lbl{font-size:9px;color:var(--text3);letter-spacing:.8px;text-transform:uppercase;margin-top:3px;}
+.prof-section{padding:20px;}
+.prof-section-title{font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
+.prof-field{background:var(--bg2);border-radius:13px;border:1px solid var(--border);padding:13px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+.pf-label{font-size:11px;color:var(--text3);}
+.pf-value{font-size:13px;color:var(--text);font-weight:500;}
+.pf-arrow{font-size:12px;color:var(--text3);}
+.gallery-row{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;}
+.gallery-row::-webkit-scrollbar{display:none;}
+.gallery-thumb{width:90px;height:90px;border-radius:12px;overflow:hidden;flex-shrink:0;cursor:pointer;border:1px solid var(--border);}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;}
+.gallery-add{width:90px;height:90px;border-radius:12px;border:1px dashed var(--border2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;color:var(--text3);flex-shrink:0;}
+
+
+/* ═══════════════════════════════════════════
+   ███╗   ███╗ █████╗ ███████╗████████╗███████╗██████╗
+   ████╗ ████║██╔══██╗██╔════╝╚══██╔══╝██╔════╝██╔══██╗
+   ██╔████╔██║███████║███████╗   ██║   █████╗  ██████╔╝
+   ██║╚██╔╝██║██╔══██║╚════██║   ██║   ██╔══╝  ██╔══██╗
+   ██║ ╚═╝ ██║██║  ██║███████║   ██║   ███████╗██║  ██║
+   ═══════════════════════════════════════════ */
+
+/* ── MASTER SPLASH ── */
+#m-splash{background:var(--bg);display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 48px;}
+.ms-hero{
+  height:320px;position:relative;overflow:hidden;
+  background:url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=750&q=80') center/cover;
+}
+.ms-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,11,9,.15) 0%,rgba(13,11,9,.9) 100%);}
+.ms-hero-content{position:absolute;bottom:24px;left:24px;right:24px;z-index:1;}
+
+/* ── MASTER DASHBOARD ── */
+#m-dash{background:var(--bg);}
+.m-dash-hdr{padding:44px 20px 20px;background:var(--bg2);border-bottom:1px solid var(--border);}
+
+/* Earnings quick view */
+.earnings-card{
+  background:linear-gradient(135deg,rgba(201,169,110,.08) 0%,rgba(155,127,212,.06) 100%);
+  border:1px solid rgba(201,169,110,.15);border-radius:20px;padding:20px;margin-bottom:10px;
+  position:relative;overflow:hidden;
+}
+.earnings-card::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(201,169,110,.08),transparent 70%);pointer-events:none;}
+.ec-label{font-size:9px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.ec-amount{font-family:'Playfair Display',serif;font-size:38px;color:var(--gold2);}
+.ec-sub{font-size:11px;color:var(--text3);margin-top:4px;display:flex;gap:10px;}
+.ec-sub span{color:var(--sage);}
+
+/* Master schedule mini */
+.mini-schedule{display:flex;flex-direction:column;gap:6px;}
+.ms-appt{
+  background:var(--bg2);border-radius:14px;border:1px solid var(--border);
+  padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .15s;
+}
+.ms-appt:hover{border-color:var(--border2);}
+.msa-time{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);min-width:44px;}
+.msa-info{flex:1;}
+.msa-client{font-size:12px;font-weight:500;color:var(--text);}
+.msa-svc{font-size:10px;color:var(--text3);margin-top:1px;}
+.msa-price{font-family:'Playfair Display',serif;font-size:15px;color:var(--text2);}
+.msa-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.msa-dot.gold{background:var(--gold);}
+.msa-dot.rose{background:var(--rose);}
+.msa-dot.sage{background:var(--sage);}
+
+/* ── MASTER CALENDAR ── */
+#m-calendar{background:var(--bg);}
+/* same as salon calendar styles above, reused */
+
+/* ── MASTER SERVICES ── */
+#m-services{background:var(--bg);}
+
+/* ── MASTER STATS ── */
+#m-stats{background:var(--bg);}
+.perf-ring{width:110px;height:110px;position:relative;flex-shrink:0;}
+.perf-ring svg{width:100%;height:100%;transform:rotate(-90deg);}
+.perf-ring-val{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.prv{font-family:'Playfair Display',serif;font-size:24px;color:var(--text);}
+.prl{font-size:9px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:1px;}
+
+/* ── MASTER CHAT ── */
+#m-chat{background:var(--bg);}
+#m-chat-conv{background:var(--bg);}
+
+/* ── MASTER PROFILE ── */
+#m-profile{background:var(--bg);}
+.m-prof-hero{
+  height:240px;position:relative;overflow:hidden;display:flex;align-items:flex-end;
+  background:url('https://images.unsplash.com/photo-1580489944761-15a19d654956?w=750&q=80') top/cover;
+}
+.m-prof-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,11,9,.1),rgba(13,11,9,.85));}
+.mph-content{position:relative;z-index:1;padding:0 20px 18px;width:100%;display:flex;align-items:flex-end;gap:14px;}
+.mph-av{width:70px;height:70px;border-radius:50%;overflow:hidden;border:3px solid var(--border2);flex-shrink:0;}
+.mph-av img{width:100%;height:100%;object-fit:cover;}
+.mph-info .mn{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);}
+.mph-info .mr{font-size:12px;color:var(--gold);margin-top:2px;}
+.mph-info .ms{font-size:11px;color:var(--text3);}
+.master-rating{display:flex;align-items:center;gap:3px;margin-top:4px;}
+.mr-stars{color:var(--gold);font-size:12px;}
+.mr-val{font-size:11px;color:var(--text2);margin-left:3px;}
+
+.skills-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px;}
+.skill-tag{padding:5px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;font-size:11px;color:var(--text2);}
+
+/* ─── DOTS NAV ─── */
+.dots-nav{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:9999;pointer-events:none;}
+
+/* ── CALENDAR TAB BUTTONS ── */
+.cal-tab{flex:1;padding:7px 10px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.3px;border:none;cursor:pointer;transition:all .2s;color:var(--text3);background:transparent;}
+.cal-tab.on{background:var(--bg2);color:var(--gold);box-shadow:0 1px 4px rgba(0,0,0,.3);}
+
+/* ── MASTER COLUMN TABS ── */
+.master-col-tab{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 12px;border-radius:14px;cursor:pointer;border:1px solid var(--border);background:var(--bg2);min-width:72px;transition:all .2s;}
+.master-col-tab img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--bg4);}
+.master-col-tab span{font-size:11px;font-weight:500;color:var(--text2);}
+.master-col-tab.on{border-color:rgba(201,169,110,.35);background:var(--gold-bg);}
+.master-col-tab.on span{color:var(--gold);}
+.master-col-tab.on img{border-color:var(--gold);}
+.mct-free{font-size:9px;color:var(--sage);letter-spacing:.3px;}
+
+/* ── MASTER COLUMN LAYOUT ── */
+.master-col{padding:0 14px 14px;}
+.master-col-header{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--border);margin-bottom:10px;}
+.mch-status{margin-left:auto;font-size:10px;padding:4px 10px;border-radius:20px;font-weight:500;}
+.mch-status.active-s{background:var(--sage-bg);color:var(--sage);}
+.mch-status.busy-s{background:var(--amber-bg);color:var(--amber);}
+
+/* ── MASTER TIMELINE ROWS ── */
+.master-timeline{display:flex;flex-direction:column;gap:6px;}
+.mt-row{display:flex;align-items:center;gap:10px;min-height:48px;}
+.mt-time{width:38px;font-size:10px;color:var(--text3);text-align:right;flex-shrink:0;line-height:1.2;}
+.mt-slot{flex:1;}
+.mt-block{border-radius:12px;padding:10px 12px;border-left:3px solid;}
+.mtb-client{font-size:12px;font-weight:500;color:var(--text);}
+.mtb-svc{font-size:10px;color:var(--text2);margin-top:2px;}
+
+/* Free slot */
+.free-slot{border:1.5px dashed rgba(111,175,136,.35);border-radius:12px;padding:10px 14px;cursor:pointer;transition:all .2s;background:rgba(111,175,136,.03);}
+.free-slot:hover{border-color:var(--sage);background:var(--sage-bg);}
+.free-slot:hover .free-label{color:var(--sage);}
+.free-label{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:6px;}
+.free-label::before{content:'✚';font-size:10px;}
+
+/* Off slot */
+.off-slot{border-radius:12px;padding:8px 14px;background:var(--bg3);opacity:.5;}
+.off-slot span{font-size:10px;color:var(--text3);}
+
+/* ── SLIDE UP ANIMATION ── */
+@keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+
+/* ════════════════════════════════
+   MASTER PROFILE TABS
+   ════════════════════════════════ */
+.prof-stab{
+  flex:1;padding:11px 4px;border:none;background:transparent;
+  font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;
+  color:var(--text3);letter-spacing:.3px;cursor:pointer;
+  border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;
+}
+.prof-stab.on{color:var(--violet);border-bottom-color:var(--violet);}
+.prof-stab:hover:not(.on){color:var(--text2);}
+.prof-tab-body{flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;}
+.prof-tab-body::-webkit-scrollbar{display:none;}
+
+/* ════════════════════════════════
+   SCHEDULE SETTINGS
+   ════════════════════════════════ */
+.sched-section{padding:16px 16px 0;}
+.sched-section-title{
+  font-size:10px;color:var(--text3);letter-spacing:1.5px;
+  text-transform:uppercase;margin-bottom:10px;
+  display:flex;align-items:center;gap:6px;
+}
+.sched-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.sched-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:14px;}
+/* Buffer pills */
+.buffer-pill{
+  padding:7px 14px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;
+  border:1px solid var(--border);color:var(--text3);background:var(--bg3);transition:all .15s;
+}
+.buffer-pill:hover{border-color:var(--gold);color:var(--gold);}
+.buffer-pill.on{background:var(--gold-bg);border-color:var(--gold);color:var(--gold);}
+/* Day rows */
+.day-row{
+  display:flex;align-items:center;gap:10px;
+  background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:10px 12px;
+  transition:all .2s;
+}
+.day-row.off{opacity:.55;}
+.day-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;flex-shrink:0;}
+.day-name{font-size:12px;font-weight:600;color:var(--text);width:20px;}
+.day-switch{width:36px;height:20px;background:var(--bg4);border-radius:10px;position:relative;transition:background .2s;flex-shrink:0;}
+.day-switch.on{background:var(--gold);}
+.day-knob{position:absolute;top:2px;left:2px;width:16px;height:16px;background:#fff;border-radius:50%;transition:left .2s;}
+.day-switch.on .day-knob{left:18px;}
+.day-hours{display:flex;align-items:center;gap:6px;flex:1;justify-content:flex-end;}
+.off-hours{justify-content:flex-end;}
+.time-inp{
+  width:52px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;
+  padding:5px 6px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;
+  color:var(--gold);text-align:center;outline:none;cursor:pointer;
+}
+.time-inp:focus{border-color:rgba(201,169,110,.4);}
+/* Mini calendar */
+.mini-cal-d{
+  font-size:10px;font-weight:500;padding:4px 2px;border-radius:6px;
+  cursor:pointer;transition:all .15s;text-align:center;line-height:1.6;
+}
+.mini-cal-d.avail{color:var(--sage);background:rgba(111,175,136,.08);}
+.mini-cal-d.avail:hover{background:var(--sage-bg);}
+.mini-cal-d.off-day{color:var(--text3);background:var(--bg3);cursor:default;}
+.mini-cal-d.blocked{color:var(--rose);background:var(--rose-bg);border:1px solid rgba(204,96,112,.3);}
+.mini-cal-d.today-d{outline:1px solid var(--gold);}
+/* Service duration row */
+.svc-dur-row{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:11px 13px;
+}
+.dur-btn{
+  width:28px;height:28px;border-radius:8px;border:1px solid var(--border);
+  background:var(--bg3);color:var(--text2);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .15s;font-family:'DM Sans',sans-serif;
+}
+.dur-btn:hover{border-color:var(--gold);color:var(--gold);}
+.dur-val{font-family:'Playfair Display',serif;font-size:18px;color:var(--text);min-width:28px;text-align:center;}
+
+/* ════════════════════════════════
+   CLIENTS LIST
+   ════════════════════════════════ */
+.client-filter-pill{
+  padding:5px 12px;border-radius:20px;font-size:10px;font-weight:500;
+  border:1px solid var(--border);color:var(--text3);background:var(--bg3);
+  cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0;
+}
+.client-filter-pill:hover{border-color:var(--violet);color:var(--violet);}
+.client-filter-pill.on{background:var(--violet-bg);border-color:rgba(155,127,212,.3);color:var(--violet);}
+.client-row{
+  display:flex;align-items:center;gap:12px;padding:12px 16px;
+  border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;
+}
+.client-row:hover{background:var(--bg2);}
+
+/* ════════════════════════════════
+   WAITLIST CARDS
+   ════════════════════════════════ */
+.wl-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:16px;
+  padding:14px;transition:all .2s;
+}
+.wl-card.urgent{border-color:rgba(204,96,112,.3);background:linear-gradient(135deg,rgba(204,96,112,.05),var(--bg2));}
+.wl-btn{
+  border:none;border-radius:10px;padding:8px 12px;
+  font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;cursor:pointer;transition:all .15s;
+}
+.wl-btn.accept{flex:1;background:var(--grad-gold);color:var(--bg);}
+.wl-btn.accept:hover{opacity:.9;}
+.wl-btn.decline{width:36px;background:var(--bg3);border:1px solid var(--border);color:var(--text3);font-size:14px;}
+.wl-btn.decline:hover{border-color:var(--rose);color:var(--rose);}
+.wl-card.done{opacity:.4;pointer-events:none;}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ SALON PHONE ═══════════ -->
+<div class="phone-wrap">
+  <div class="phone-label">Салон / Адміністратор</div>
+  <div class="phone">
+    <div class="notch"><div class="notch-cam"></div></div>
+
+    <!-- SALON SPLASH -->
+    <div class="screen active" id="s-splash">
+      <div class="ss-hero">
+        <div class="ss-hero-content">
+          <div class="ss-tag"><div class="ss-tag-dot"></div><span class="ss-tag-txt">Бізнес-панель</span></div>
+          <div class="ss-salon-name">Atelier <em>Belle</em></div>
+          <div class="ss-salon-sub">вул. Саксаганського, 12 · Київ</div>
+        </div>
+      </div>
+      <div class="ss-actions">
+        <button class="btn btn-gold" onclick="sGoTo('s-dash')">Відкрити панель керування</button>
+        <div class="ss-or">або</div>
+        <button class="btn btn-outline" onclick="sGoTo('s-dash')">Увійти в інший акаунт</button>
+      </div>
+    </div>
+
+    <!-- SALON DASHBOARD -->
+    <div class="screen" id="s-dash">
+      <div class="s-dash-hdr">
+        <div class="sb" style="padding:0;height:auto;margin-bottom:14px;"><span>9:41</span><span style="color:var(--text3)">▋▋▋ 🔋</span></div>
+        <div class="sdh-row">
+          <div><div class="sdh-greeting">Доброго ранку, <em>Atelier</em></div><div class="sdh-date">П'ятниця, 28 лютого 2025</div></div>
+          <div class="notification-btn" onclick="sGoTo('s-chat')"><div>🔔</div><div class="notif-badge"></div></div>
+        </div>
+        <div class="today-row">
+          <div class="today-pill"><div class="tp-val">12</div><div class="tp-lbl">Записів</div></div>
+          <div class="today-pill"><div class="tp-val" style="color:var(--gold)">8 420</div><div class="tp-lbl">Дохід ₴</div></div>
+          <div class="today-pill"><div class="tp-val" style="color:var(--sage)">4</div><div class="tp-lbl">Майстри</div></div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-hdr"><div class="sh-title">Записи на сьогодні</div><div class="sh-link" onclick="sGoTo('s-calendar')">Розклад</div></div>
+        <div class="appt-card"><div class="appt-time"><div class="at-h">10:00</div><div class="at-m">год</div></div><div class="appt-divider gold"></div><div class="appt-info"><div class="appt-client">Марія Коваль</div><div class="appt-detail">💅 Манікюр гель-лак · 90хв</div></div><div class="appt-meta"><div class="appt-price">420 ₴</div><div class="appt-master">Олена</div></div></div>
+        <div class="appt-card"><div class="appt-time"><div class="at-h">11:30</div><div class="at-m">год</div></div><div class="appt-divider rose"></div><div class="appt-info"><div class="appt-client">Ірина Петренко</div><div class="appt-detail">✂️ Стрижка + укладка · 75хв</div></div><div class="appt-meta"><div class="appt-price">680 ₴</div><div class="appt-master">Анна</div></div></div>
+        <div class="appt-card"><div class="appt-time"><div class="at-h">13:00</div><div class="at-m">год</div></div><div class="appt-divider sage"></div><div class="appt-info"><div class="appt-client">Оксана Ляшко</div><div class="appt-detail">🎨 Фарбування · 150хв</div></div><div class="appt-meta"><div class="appt-price">1 200 ₴</div><div class="appt-master">Тетяна</div></div></div>
+        <div class="appt-card" style="border-color:rgba(90,159,212,.2)"><div class="appt-time"><div class="at-h">15:30</div><div class="at-m">год</div></div><div class="appt-divider sky"></div><div class="appt-info"><div class="appt-client">Наталія Бондар</div><div class="appt-detail">🌿 Кератин · 180хв</div></div><div class="appt-meta"><div class="appt-price">1 800 ₴</div><div class="appt-master">Тетяна</div></div></div>
+      </div>
+
+      <div class="sec" style="margin-top:4px;">
+        <div class="sec-hdr"><div class="sh-title">Тижневий дохід</div><div class="sh-link" onclick="sGoTo('s-stats')">Детальніше</div></div>
+        <div class="rev-chart">
+          <div class="rc-hdr"><div><div class="rc-lbl">Цей тиждень</div><div class="rc-val">38 640 ₴</div></div><div class="rc-change">↑ 14%</div></div>
+          <div class="bars">
+            <div class="bar" style="height:40%;background:var(--bg4);"></div>
+            <div class="bar" style="height:65%;background:linear-gradient(to top,#4A3015,#8B6535);"></div>
+            <div class="bar" style="height:50%;background:var(--bg4);"></div>
+            <div class="bar" style="height:80%;background:var(--bg4);"></div>
+            <div class="bar hi" style="height:100%;"></div>
+            <div class="bar" style="height:30%;background:var(--bg4);opacity:.4;"></div>
+            <div class="bar" style="height:15%;background:var(--bg4);opacity:.3;"></div>
+          </div>
+          <div class="bar-labels"><div class="bar-lbl">Пн</div><div class="bar-lbl">Вт</div><div class="bar-lbl">Ср</div><div class="bar-lbl">Чт</div><div class="bar-lbl" style="color:var(--gold)">Пт</div><div class="bar-lbl">Сб</div><div class="bar-lbl">Нд</div></div>
+        </div>
+      </div>
+      <div style="height:80px;"></div>
+      <div class="bnav">
+        <div class="ni on"><div class="ic">🏠</div><div class="ndot"></div><div class="lb">Головна</div></div>
+        <div class="ni" onclick="sGoTo('s-calendar')"><div class="ic">📅</div><div class="lb">Розклад</div></div>
+        <div class="ni" onclick="sGoTo('s-team')"><div class="ic">👥</div><div class="lb">Команда</div></div>
+        <div class="ni" onclick="sGoTo('s-stats')"><div class="ic">📊</div><div class="lb">Аналіт.</div></div>
+        <div class="ni" onclick="sGoTo('s-profile')"><div class="ic">🏪</div><div class="lb">Профіль</div></div>
+      </div>
+    </div>
+
+    <!-- SALON CALENDAR — redesigned with General + Per-Master tabs -->
+    <div class="screen" id="s-calendar" style="overflow:hidden;display:flex;flex-direction:column;">
+
+      <!-- STICKY HEADER -->
+      <div class="s-cal-hdr" style="flex-shrink:0;">
+        <div class="sb" style="padding:0;height:auto;margin-bottom:12px;"><span>9:41</span><span style="color:var(--text3)">▋▋▋</span></div>
+
+        <!-- Week strip -->
+        <div class="cal-week" id="cal-week-strip">
+          <div class="cw-day" onclick="selCalDay(this)"><div class="wd">Пн</div><div class="wn">24</div><div class="cw-dot"></div></div>
+          <div class="cw-day" onclick="selCalDay(this)"><div class="wd">Вт</div><div class="wn">25</div><div class="cw-dot"><div class="cdot g"></div></div></div>
+          <div class="cw-day" onclick="selCalDay(this)"><div class="wd">Ср</div><div class="wn">26</div><div class="cw-dot"><div class="cdot g"></div><div class="cdot r"></div></div></div>
+          <div class="cw-day today" onclick="selCalDay(this)"><div class="wd">Чт</div><div class="wn">27</div><div class="cw-dot"><div class="cdot g"></div><div class="cdot s"></div></div></div>
+          <div class="cw-day on" onclick="selCalDay(this)"><div class="wd">Пт</div><div class="wn">28</div><div class="cw-dot"><div class="cdot g"></div><div class="cdot r"></div><div class="cdot s"></div></div></div>
+          <div class="cw-day" onclick="selCalDay(this)"><div class="wd">Сб</div><div class="wn">1</div><div class="cw-dot"><div class="cdot g"></div></div></div>
+          <div class="cw-day" onclick="selCalDay(this)" style="opacity:.35"><div class="wd">Нд</div><div class="wn">2</div><div class="cw-dot"></div></div>
+        </div>
+
+        <!-- View mode tabs -->
+        <div style="display:flex;gap:6px;margin-top:12px;align-items:center;">
+          <div style="display:flex;gap:4px;flex:1;background:var(--bg3);border-radius:10px;padding:3px;">
+            <button id="tab-all" class="cal-tab on" onclick="switchCalTab('all')">📋 Загальний</button>
+            <button id="tab-masters" class="cal-tab" onclick="switchCalTab('masters')">👥 По майстрах</button>
+          </div>
+          <button class="btn btn-ghost" style="font-size:11px;padding:8px 12px;flex-shrink:0;" onclick="openNewBooking()">+ Запис</button>
+        </div>
+      </div>
+
+      <!-- ── TAB: GENERAL (all services, sequential booking) ── -->
+      <div id="cal-view-all" style="flex:1;overflow-y:auto;scrollbar-width:none;">
+
+        <!-- Sequential booking hint -->
+        <div id="seq-hint" style="margin:10px 14px 0;background:linear-gradient(135deg,rgba(201,169,110,.08),rgba(90,159,212,.06));border:1px solid rgba(201,169,110,.18);border-radius:14px;padding:11px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;" onclick="toggleSeqMode()">
+          <div style="font-size:18px;">🔗</div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:500;color:var(--gold);">Послідовний запис</div>
+            <div style="font-size:10px;color:var(--text3);margin-top:1px;">Оберіть клієнта → додайте кілька послуг поспіль</div>
+          </div>
+          <div id="seq-toggle" style="width:34px;height:20px;background:var(--bg4);border-radius:10px;position:relative;transition:background .2s;cursor:pointer;">
+            <div id="seq-knob" style="position:absolute;top:2px;left:2px;width:16px;height:16px;background:var(--text3);border-radius:50%;transition:all .2s;"></div>
+          </div>
+        </div>
+
+        <!-- Sequential booking panel (shown when toggle is on) -->
+        <div id="seq-panel" style="display:none;margin:8px 14px 0;background:var(--bg2);border:1px solid rgba(201,169,110,.25);border-radius:14px;padding:12px 14px;">
+          <div style="font-size:11px;color:var(--text2);margin-bottom:10px;display:flex;align-items:center;gap:6px;">
+            <span style="font-size:14px;">👤</span> Клієнт: <strong style="color:var(--text);">Марія Коваль</strong>
+            <span style="margin-left:auto;font-size:10px;color:var(--gold);cursor:pointer;">Змінити</span>
+          </div>
+          <div style="font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Послідовність послуг</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="background:var(--bg3);border-radius:10px;padding:9px 12px;display:flex;align-items:center;gap:10px;border-left:3px solid var(--gold);">
+              <div style="font-size:16px;">💅</div>
+              <div style="flex:1;"><div style="font-size:12px;color:var(--text);font-weight:500;">Манікюр гель-лак</div><div style="font-size:10px;color:var(--text3);">10:00 — 11:30 · Олена</div></div>
+              <div style="font-size:13px;color:var(--gold);">420 ₴</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;padding:0 12px;">
+              <div style="width:1px;height:14px;background:var(--border2);margin-left:18px;"></div>
+              <div style="font-size:9px;color:var(--text3);">→ одразу після</div>
+            </div>
+            <div style="background:var(--bg3);border-radius:10px;padding:9px 12px;display:flex;align-items:center;gap:10px;border-left:3px solid var(--rose);">
+              <div style="font-size:16px;">✂️</div>
+              <div style="flex:1;"><div style="font-size:12px;color:var(--text);font-weight:500;">Стрижка + укладка</div><div style="font-size:10px;color:var(--text3);">11:30 — 13:00 · Анна</div></div>
+              <div style="font-size:13px;color:var(--rose);">680 ₴</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px 0;border-top:1px solid var(--border);margin-top:4px;">
+              <div style="font-size:11px;color:var(--text2);">Разом · 3 год</div>
+              <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);">1 100 ₴</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:10px;">
+            <button style="flex:1;padding:9px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--text2);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;">+ Послуга</button>
+            <button style="flex:1;padding:9px;background:var(--grad-gold);border:none;border-radius:10px;color:var(--bg);font-size:11px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;">✓ Підтвердити</button>
+          </div>
+        </div>
+
+        <!-- All-services timeline -->
+        <div style="padding:10px 14px 0;display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;">Усі майстри · 28 лют</div>
+          <div style="display:flex;gap:6px;">
+            <div style="display:flex;align-items:center;gap:3px;font-size:9px;color:var(--gold)"><div style="width:6px;height:6px;background:var(--gold);border-radius:50%;"></div>Олена</div>
+            <div style="display:flex;align-items:center;gap:3px;font-size:9px;color:var(--rose)"><div style="width:6px;height:6px;background:var(--rose);border-radius:50%;"></div>Анна</div>
+            <div style="display:flex;align-items:center;gap:3px;font-size:9px;color:var(--sage)"><div style="width:6px;height:6px;background:var(--sage);border-radius:50%;"></div>Тетяна</div>
+          </div>
+        </div>
+
+        <div class="timeline" style="padding:8px 14px 0;">
+          <div class="tl-row"><div class="tl-time">09:00</div><div class="tl-line"></div><div class="tl-slot"><div class="tl-empty" style="border-color:rgba(201,169,110,.15);"><span>+ Додати запис</span></div></div></div>
+
+          <div class="tl-row"><div class="tl-time">10:00</div><div class="tl-line"></div><div class="tl-slot">
+            <div class="tl-block gold" style="position:relative;">
+              <div class="tb-client">Марія Коваль</div>
+              <div class="tb-svc">💅 Гель-лак · 90хв</div>
+              <div class="tb-master" style="color:var(--gold);">● Олена</div>
+              <div id="seq-chain-1" style="display:none;position:absolute;top:8px;right:8px;background:rgba(201,169,110,.2);border-radius:6px;padding:2px 6px;font-size:9px;color:var(--gold);">🔗 ланцюг</div>
+            </div>
+          </div></div>
+
+          <div class="tl-row"><div class="tl-time">11:30</div><div class="tl-line"></div><div class="tl-slot">
+            <div class="tl-block rose" style="position:relative;">
+              <div class="tb-client">Марія Коваль <span style="font-size:9px;color:rgba(204,96,112,.7);">→ продовж.</span></div>
+              <div class="tb-svc">✂️ Стрижка + укладка · 75хв</div>
+              <div class="tb-master" style="color:var(--rose);">● Анна</div>
+              <div id="seq-chain-2" style="display:none;position:absolute;top:8px;right:8px;background:rgba(204,96,112,.2);border-radius:6px;padding:2px 6px;font-size:9px;color:var(--rose);">🔗 ланцюг</div>
+            </div>
+          </div></div>
+
+          <div class="tl-row"><div class="tl-time">13:00</div><div class="tl-line"></div><div class="tl-slot">
+            <div class="tl-block sage">
+              <div class="tb-client">Оксана Ляшко</div>
+              <div class="tb-svc">🎨 Фарбування · 150хв</div>
+              <div class="tb-master" style="color:var(--sage);">● Тетяна</div>
+            </div>
+          </div></div>
+
+          <div class="tl-row"><div class="tl-time">14:30</div><div class="tl-line"></div><div class="tl-slot"><div class="tl-empty" style="border-color:rgba(201,169,110,.15);"><span>+ Вільний слот</span></div></div></div>
+
+          <div class="tl-row"><div class="tl-time">15:30</div><div class="tl-line"></div><div class="tl-slot">
+            <div class="tl-block gold">
+              <div class="tb-client">Наталія Бондар</div>
+              <div class="tb-svc">🌿 Кератин · 180хв</div>
+              <div class="tb-master" style="color:var(--gold);">● Тетяна</div>
+            </div>
+          </div></div>
+
+          <div class="tl-row"><div class="tl-time">17:00</div><div class="tl-line"></div><div class="tl-slot"><div class="tl-empty" style="border-color:rgba(201,169,110,.15);"><span>+ Вільний слот</span></div></div></div>
+
+          <div class="tl-row"><div class="tl-time">18:00</div><div class="tl-line"></div><div class="tl-slot">
+            <div class="tl-block rose">
+              <div class="tb-client">Соф'я Ковтун</div>
+              <div class="tb-svc">💋 Макіяж · 60хв</div>
+              <div class="tb-master" style="color:var(--rose);">● Анна</div>
+            </div>
+          </div></div>
+          <div style="height:80px;"></div>
+        </div>
+      </div>
+
+      <!-- ── TAB: PER MASTER COLUMNS ── -->
+      <div id="cal-view-masters" style="flex:1;overflow:hidden;display:none;flex-direction:column;">
+
+        <!-- Master tabs scroll -->
+        <div style="padding:10px 14px 8px;flex-shrink:0;background:var(--bg);">
+          <div style="font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">28 лютого · Вибрати майстра</div>
+          <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;" id="master-tab-row">
+            <div class="master-col-tab on" onclick="selMasterTab(this,'col-elena')" data-col="col-elena">
+              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=60&q=80" alt="Олена">
+              <span>Олена</span>
+              <div class="mct-free">5 вільних</div>
+            </div>
+            <div class="master-col-tab" onclick="selMasterTab(this,'col-anna')" data-col="col-anna">
+              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=60&q=80" alt="Анна">
+              <span>Анна</span>
+              <div class="mct-free">3 вільних</div>
+            </div>
+            <div class="master-col-tab" onclick="selMasterTab(this,'col-tatiana')" data-col="col-tatiana">
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=60&q=80" alt="Тетяна">
+              <span>Тетяна</span>
+              <div class="mct-free">2 вільних</div>
+            </div>
+            <div class="master-col-tab" onclick="selMasterTab(this,'col-maria')" data-col="col-maria">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&q=80" alt="Марія">
+              <span>Марія</span>
+              <div class="mct-free">7 вільних</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scrollable timeline columns -->
+        <div style="flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;">
+
+          <!-- ELENA column -->
+          <div class="master-col" id="col-elena">
+            <div class="master-col-header">
+              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=80&q=80" class="ava" style="width:38px;height:38px;" alt="Олена">
+              <div>
+                <div style="font-size:14px;font-weight:600;color:var(--text);">Олена Іванова</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:1px;">Манікюрист · Педикюр</div>
+              </div>
+              <div class="mch-status active-s">● Вільна зараз</div>
+            </div>
+            <div class="master-timeline">
+              <div class="mt-row free"  onclick="openSlot('Олена','09:00')"><div class="mt-time">09:00</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row busy"><div class="mt-time">10:00</div><div class="mt-slot"><div class="mt-block" style="border-color:var(--gold);background:var(--gold-bg);"><div class="mtb-client">Марія Коваль</div><div class="mtb-svc">💅 Гель-лак · 90хв</div></div></div></div>
+              <div class="mt-row free" onclick="openSlot('Олена','11:30')"><div class="mt-time">11:30</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row busy"><div class="mt-time">13:00</div><div class="mt-slot"><div class="mt-block" style="border-color:var(--violet);background:var(--violet-bg);"><div class="mtb-client">Соф'я Бойко</div><div class="mtb-svc">💅 Манікюр · 60хв</div></div></div></div>
+              <div class="mt-row free" onclick="openSlot('Олена','14:00')"><div class="mt-time">14:00</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row free" onclick="openSlot('Олена','15:00')"><div class="mt-time">15:00</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row busy"><div class="mt-time">16:00</div><div class="mt-slot"><div class="mt-block" style="border-color:var(--gold);background:var(--gold-bg);"><div class="mtb-client">Вікторія Зінченко</div><div class="mtb-svc">✨ Нарощування · 150хв</div></div></div></div>
+              <div class="mt-row free" onclick="openSlot('Олена','18:30')"><div class="mt-time">18:30</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row off"><div class="mt-time">19:00</div><div class="mt-slot off-slot"><span>Кінець робочого дня</span></div></div>
+            </div>
+          </div>
+
+          <!-- ANNA column -->
+          <div class="master-col" id="col-anna" style="display:none;">
+            <div class="master-col-header">
+              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&q=80" class="ava" style="width:38px;height:38px;" alt="Анна">
+              <div>
+                <div style="font-size:14px;font-weight:600;color:var(--text);">Анна Мельник</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:1px;">Стиліст · Колорист</div>
+              </div>
+              <div class="mch-status busy-s">● Зайнята зараз</div>
+            </div>
+            <div class="master-timeline">
+              <div class="mt-row free" onclick="openSlot('Анна','09:00')"><div class="mt-time">09:00</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row free" onclick="openSlot('Анна','10:00')"><div class="mt-time">10:00</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row busy"><div class="mt-time">11:30</div><div class="mt-slot"><div class="mt-block" style="border-color:var(--rose);background:var(--rose-bg);"><div class="mtb-client">Ірина Петренко</div><div class="mtb-svc">✂️ Стрижка + укладка · 75хв</div></div></div></div>
+              <div class="mt-row busy"><div class="mt-time">13:30</div><div class="mt-slot"><div class="mt-block" style="border-color:var(--rose);background:var(--rose-bg);"><div class="mtb-client">Ольга Саченко</div><div class="mtb-svc">💆 Чистка обличчя · 90хв</div></div></div></div>
+              <div class="mt-row free" onclick="openSlot('Анна','15:00')"><div class="mt-time">15:00</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row busy"><div class="mt-time">18:00</div><div class="mt-slot"><div class="mt-block" style="border-color:var(--rose);background:var(--rose-bg);"><div class="mtb-client">Соф'я Ковтун</div><div class="mtb-svc">💋 Макіяж · 60хв</div></div></div></div>
+              <div class="mt-row off"><div class="mt-time">21:00</div><div class="mt-slot off-slot"><span>Кінець робочого дня</span></div></div>
+            </div>
+          </div>
+
+          <!-- TATIANA column -->
+          <div class="master-col" id="col-tatiana" style="display:none;">
+            <div class="master-col-header">
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80" class="ava" style="width:38px;height:38px;" alt="Тетяна">
+              <div>
+                <div style="font-size:14px;font-weight:600;color:var(--text);">Тетяна Стець</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:1px;">Стиліст · Кератин</div>
+              </div>
+              <div class="mch-status busy-s">● Зайнята зараз</div>
+            </div>
+            <div class="master-timeline">
+              <div class="mt-row free" onclick="openSlot('Тетяна','09:00')"><div class="mt-time">09:00</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row busy"><div class="mt-time">13:00</div><div class="mt-slot"><div class="mt-block" style="border-color:var(--sage);background:var(--sage-bg);"><div class="mtb-client">Оксана Ляшко</div><div class="mtb-svc">🎨 Фарбування · 150хв</div></div></div></div>
+              <div class="mt-row busy"><div class="mt-time">15:30</div><div class="mt-slot"><div class="mt-block" style="border-color:var(--sage);background:var(--sage-bg);"><div class="mtb-client">Наталія Бондар</div><div class="mtb-svc">🌿 Кератин · 180хв</div></div></div></div>
+              <div class="mt-row free" onclick="openSlot('Тетяна','18:30')"><div class="mt-time">18:30</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row off"><div class="mt-time">21:00</div><div class="mt-slot off-slot"><span>Кінець робочого дня</span></div></div>
+            </div>
+          </div>
+
+          <!-- MARIA column -->
+          <div class="master-col" id="col-maria" style="display:none;">
+            <div class="master-col-header">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=80" class="ava" style="width:38px;height:38px;" alt="Марія">
+              <div>
+                <div style="font-size:14px;font-weight:600;color:var(--text);">Марія Дем'яненко</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:1px;">Майстер · Брови · Вії</div>
+              </div>
+              <div class="mch-status active-s">● Вільна зараз</div>
+            </div>
+            <div class="master-timeline">
+              <div class="mt-row free" onclick="openSlot('Марія','09:00')"><div class="mt-time">09:00</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row free" onclick="openSlot('Марія','10:00')"><div class="mt-time">10:00</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row busy"><div class="mt-time">11:00</div><div class="mt-slot"><div class="mt-block" style="border-color:var(--amber);background:var(--amber-bg);"><div class="mtb-client">Катерина Поліщук</div><div class="mtb-svc">👁 Брови · ламінування · 60хв</div></div></div></div>
+              <div class="mt-row free" onclick="openSlot('Марія','12:00')"><div class="mt-time">12:00</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row free" onclick="openSlot('Марія','13:00')"><div class="mt-time">13:00</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row free" onclick="openSlot('Марія','14:00')"><div class="mt-time">14:00</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row free" onclick="openSlot('Марія','15:00')"><div class="mt-time">15:00</div><div class="mt-slot free-slot"><span class="free-label">Вільно · + Записати</span></div></div>
+              <div class="mt-row busy"><div class="mt-time">16:00</div><div class="mt-slot"><div class="mt-block" style="border-color:var(--amber);background:var(--amber-bg);"><div class="mtb-client">Ліна Захарченко</div><div class="mtb-svc">👁 Вії · нарощування · 120хв</div></div></div></div>
+              <div class="mt-row off"><div class="mt-time">21:00</div><div class="mt-slot off-slot"><span>Кінець робочого дня</span></div></div>
+            </div>
+          </div>
+
+        </div><!-- /scrollable -->
+      </div><!-- /cal-view-masters -->
+
+      <!-- SLOT BOOKING MODAL (shared) -->
+      <div id="slot-modal" style="display:none;position:absolute;inset:0;z-index:500;background:rgba(13,11,9,.75);backdrop-filter:blur(4px);display:none;align-items:flex-end;">
+        <div style="background:var(--bg2);border-radius:24px 24px 0 0;border:1px solid var(--border2);width:100%;padding:20px 20px 36px;animation:slideUp .25s ease;">
+          <div style="width:36px;height:4px;background:var(--bg4);border-radius:2px;margin:0 auto 16px;"></div>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--text);margin-bottom:4px;">Новий запис</div>
+          <div id="modal-slot-info" style="font-size:12px;color:var(--gold);margin-bottom:16px;"></div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div><div class="inp-label">Клієнт</div><input class="inp" type="text" placeholder="Ім'я або пошук клієнта..."></div>
+            <div><div class="inp-label">Послуга</div>
+              <select class="inp" style="cursor:pointer;"><option>💅 Манікюр гель-лак · 90хв · 420 ₴</option><option>💅 Манікюр класичний · 60хв · 280 ₴</option><option>✨ Нарощування · 150хв · 850 ₴</option><option>💎 Педикюр · 75хв · 350 ₴</option></select>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:10px 14px;cursor:pointer;">
+              <span style="font-size:14px;">🔗</span>
+              <span style="font-size:12px;color:var(--text2);">Додати ще одну послугу послідовно</span>
+              <span style="margin-left:auto;font-size:12px;color:var(--gold);">+</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:14px;">
+            <button onclick="closeSlotModal()" style="flex:1;padding:13px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;color:var(--text2);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;">Скасувати</button>
+            <button onclick="closeSlotModal()" style="flex:2;padding:13px;background:var(--grad-gold);border:none;border-radius:12px;color:var(--bg);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;">✓ Записати клієнта</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bnav" style="flex-shrink:0;">
+        <div class="ni" onclick="sGoTo('s-dash')"><div class="ic">🏠</div><div class="lb">Головна</div></div>
+        <div class="ni on"><div class="ic">📅</div><div class="ndot"></div><div class="lb">Розклад</div></div>
+        <div class="ni" onclick="sGoTo('s-team')"><div class="ic">👥</div><div class="lb">Команда</div></div>
+        <div class="ni" onclick="sGoTo('s-stats')"><div class="ic">📊</div><div class="lb">Аналіт.</div></div>
+        <div class="ni" onclick="sGoTo('s-profile')"><div class="ic">🏪</div><div class="lb">Профіль</div></div>
+      </div>
+    </div>
+
+    <!-- SALON TEAM -->
+    <div class="screen" id="s-team">
+      <div class="s-team-hdr">
+        <div class="sb" style="padding:0;height:auto;margin-bottom:14px;"><span>9:41</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--text)">Команда</div><div style="font-size:12px;color:var(--text3);margin-top:2px;">4 майстри · 2 активні зараз</div></div>
+          <button class="btn btn-ghost" style="font-size:11px;padding:8px 14px;">+ Майстер</button>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="team-card">
+          <div class="tc-top">
+            <img class="ava ava-md" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&q=80" alt="Олена">
+            <div class="tc-info"><div class="tc-name">Олена Іванова</div><div class="tc-role">Манікюрист · Педикюр</div></div>
+            <div class="tc-status active"><div class="tc-sdot"></div>Вільна</div>
+          </div>
+          <div class="tc-stats">
+            <div class="tc-stat"><div class="tsv">24</div><div class="tsl">Записів/міс</div></div>
+            <div class="tc-stat"><div class="tsv" style="color:var(--gold)">4.9</div><div class="tsl">Рейтинг</div></div>
+            <div class="tc-stat"><div class="tsv">9 800</div><div class="tsl">Дохід ₴</div></div>
+          </div>
+          <div class="tc-today"><span>Сьогодні: 5 записів</span><span style="color:var(--gold)">2 100 ₴</span></div>
+        </div>
+        <div class="team-card">
+          <div class="tc-top">
+            <img class="ava ava-md" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=80" alt="Анна">
+            <div class="tc-info"><div class="tc-name">Анна Мельник</div><div class="tc-role">Стиліст · Колорист</div></div>
+            <div class="tc-status busy"><div class="tc-sdot"></div>Зайнята</div>
+          </div>
+          <div class="tc-stats">
+            <div class="tc-stat"><div class="tsv">18</div><div class="tsl">Записів/міс</div></div>
+            <div class="tc-stat"><div class="tsv" style="color:var(--gold)">4.8</div><div class="tsl">Рейтинг</div></div>
+            <div class="tc-stat"><div class="tsv">12 400</div><div class="tsl">Дохід ₴</div></div>
+          </div>
+          <div class="tc-today"><span>Сьогодні: 3 записи</span><span style="color:var(--gold)">1 980 ₴</span></div>
+        </div>
+        <div class="team-card">
+          <div class="tc-top">
+            <img class="ava ava-md" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=80" alt="Тетяна">
+            <div class="tc-info"><div class="tc-name">Тетяна Стець</div><div class="tc-role">Стиліст · Кератин</div></div>
+            <div class="tc-status busy"><div class="tc-sdot"></div>Зайнята</div>
+          </div>
+          <div class="tc-stats">
+            <div class="tc-stat"><div class="tsv">21</div><div class="tsl">Записів/міс</div></div>
+            <div class="tc-stat"><div class="tsv" style="color:var(--gold)">5.0</div><div class="tsl">Рейтинг</div></div>
+            <div class="tc-stat"><div class="tsv">15 200</div><div class="tsl">Дохід ₴</div></div>
+          </div>
+          <div class="tc-today"><span>Сьогодні: 2 записи</span><span style="color:var(--gold)">3 000 ₴</span></div>
+        </div>
+        <div style="height:80px;"></div>
+      </div>
+      <div class="bnav">
+        <div class="ni" onclick="sGoTo('s-dash')"><div class="ic">🏠</div><div class="lb">Головна</div></div>
+        <div class="ni" onclick="sGoTo('s-calendar')"><div class="ic">📅</div><div class="lb">Розклад</div></div>
+        <div class="ni on"><div class="ic">👥</div><div class="ndot"></div><div class="lb">Команда</div></div>
+        <div class="ni" onclick="sGoTo('s-stats')"><div class="ic">📊</div><div class="lb">Аналіт.</div></div>
+        <div class="ni" onclick="sGoTo('s-profile')"><div class="ic">🏪</div><div class="lb">Профіль</div></div>
+      </div>
+    </div>
+
+    <!-- SALON STATS -->
+    <div class="screen" id="s-stats">
+      <div class="s-stats-hdr">
+        <div class="sb" style="padding:0;height:auto;margin-bottom:14px;"><span>9:41</span></div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--text)">Аналітика</div>
+        <div class="period-tabs" style="margin-top:12px;">
+          <div class="ptab">7 днів</div>
+          <div class="ptab on">Місяць</div>
+          <div class="ptab">Квартал</div>
+          <div class="ptab">Рік</div>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="big-stat">
+          <div class="bs-top">
+            <div><div class="bs-label">Загальний дохід</div><div class="bs-value">142 800 ₴</div></div>
+            <div class="bs-change up">↑ 18.4%</div>
+          </div>
+          <div class="sparkline">
+            <div class="spark" style="height:35%"></div><div class="spark" style="height:55%"></div><div class="spark" style="height:40%"></div><div class="spark" style="height:70%"></div><div class="spark" style="height:60%"></div><div class="spark hi" style="height:90%"></div><div class="spark" style="height:75%"></div><div class="spark" style="height:80%"></div><div class="spark hi" style="height:100%"></div><div class="spark" style="height:65%"></div><div class="spark" style="height:72%"></div><div class="spark" style="height:50%"></div>
+          </div>
+        </div>
+        <div class="stat-grid" style="margin-bottom:10px;">
+          <div class="stat-tile"><div class="st-label">Записів</div><div class="st-val">284</div><div class="st-sub up">↑ 12% до попер. міс.</div></div>
+          <div class="stat-tile"><div class="st-label">Нові клієнти</div><div class="st-val">38</div><div class="st-sub up">↑ 22% зростання</div></div>
+          <div class="stat-tile"><div class="st-label">Середній чек</div><div class="st-val">502 ₴</div><div class="st-sub up">↑ 5.6%</div></div>
+          <div class="stat-tile"><div class="st-label">Скасувань</div><div class="st-val">9</div><div class="st-sub down">↓ 3.2%</div></div>
+        </div>
+        <div class="sec-hdr" style="padding:0;margin-bottom:10px;"><div class="sh-title">Топ послуги</div></div>
+        <div class="top-services">
+          <div class="ts-item"><div class="tsi-name">💅 Манікюр</div><div class="tsi-bar"><div class="tsi-fill" style="width:88%;height:100%;background:linear-gradient(90deg,#C9A96E,#8B6535);border-radius:2px;"></div></div><div class="tsi-meta"><span>88 записів</span><span style="color:var(--gold)">36 960 ₴</span></div></div>
+          <div class="ts-item"><div class="tsi-name">✂️ Стрижка</div><div class="tsi-bar"><div class="tsi-fill" style="width:72%;height:100%;background:linear-gradient(90deg,#CC6070,#9B3A4A);border-radius:2px;"></div></div><div class="tsi-meta"><span>72 записи</span><span style="color:var(--rose)">48 960 ₴</span></div></div>
+          <div class="ts-item"><div class="tsi-name">🎨 Фарбування</div><div class="tsi-bar"><div class="tsi-fill" style="width:55%;height:100%;background:linear-gradient(90deg,#6FAF88,#3A8055);border-radius:2px;"></div></div><div class="tsi-meta"><span>44 записи</span><span style="color:var(--sage)">52 800 ₴</span></div></div>
+          <div class="ts-item"><div class="tsi-name">🌿 Кератин</div><div class="tsi-bar"><div class="tsi-fill" style="width:30%;height:100%;background:linear-gradient(90deg,#5A9FD4,#2A6090);border-radius:2px;"></div></div><div class="tsi-meta"><span>22 записи</span><span style="color:var(--sky)">39 600 ₴</span></div></div>
+        </div>
+        <div style="height:80px;"></div>
+      </div>
+      <div class="bnav">
+        <div class="ni" onclick="sGoTo('s-dash')"><div class="ic">🏠</div><div class="lb">Головна</div></div>
+        <div class="ni" onclick="sGoTo('s-calendar')"><div class="ic">📅</div><div class="lb">Розклад</div></div>
+        <div class="ni" onclick="sGoTo('s-team')"><div class="ic">👥</div><div class="lb">Команда</div></div>
+        <div class="ni on"><div class="ic">📊</div><div class="ndot"></div><div class="lb">Аналіт.</div></div>
+        <div class="ni" onclick="sGoTo('s-profile')"><div class="ic">🏪</div><div class="lb">Профіль</div></div>
+      </div>
+    </div>
+
+    <!-- SALON CHAT -->
+    <div class="screen" id="s-chat">
+      <div class="s-chat-hdr">
+        <div class="sb" style="padding:0;height:auto;margin-bottom:14px;"><span>9:41</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--text)">Повідомлення</div>
+          <span class="badge rose">3 нові</span>
+        </div>
+      </div>
+      <div style="background:var(--bg2);border-bottom:1px solid var(--border);">
+        <div class="chat-list-item" onclick="sGoTo('s-chat-conv')">
+          <div class="cli-av"><img class="ava ava-md" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80" alt="Марія"><div class="cli-badge">2</div></div>
+          <div class="cli-info"><div class="cli-name">Марія Коваль</div><div class="cli-preview">Дякую! Чи можна перенести на годину раніше?</div></div>
+          <div class="cli-meta"><div class="cli-time">10:24</div><div class="cli-unread">2</div></div>
+        </div>
+        <div class="chat-list-item" onclick="sGoTo('s-chat-conv')">
+          <div class="cli-av"><img class="ava ava-md" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&q=80" alt="Ірина"><div class="cli-badge">1</div></div>
+          <div class="cli-info"><div class="cli-name">Ірина Петренко</div><div class="cli-preview">Хочу записатися на фарбування наступного тижня</div></div>
+          <div class="cli-meta"><div class="cli-time">09:55</div><div class="cli-unread">1</div></div>
+        </div>
+        <div class="chat-list-item">
+          <div class="cli-av"><img class="ava ava-md" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80" alt="Оксана"></div>
+          <div class="cli-info"><div class="cli-name">Оксана Ляшко</div><div class="cli-preview">Дякую за роботу, все чудово! ❤️</div></div>
+          <div class="cli-meta"><div class="cli-time">вчора</div></div>
+        </div>
+        <div class="chat-list-item">
+          <div class="cli-av"><img class="ava ava-md" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=80" alt="Наталія"></div>
+          <div class="cli-info"><div class="cli-name">Наталія Бондар</div><div class="cli-preview">Підтверджую запис на 15:30 сьогодні</div></div>
+          <div class="cli-meta"><div class="cli-time">вчора</div></div>
+        </div>
+      </div>
+      <div class="bnav">
+        <div class="ni" onclick="sGoTo('s-dash')"><div class="ic">🏠</div><div class="lb">Головна</div></div>
+        <div class="ni" onclick="sGoTo('s-calendar')"><div class="ic">📅</div><div class="lb">Розклад</div></div>
+        <div class="ni on"><div class="ic">💬</div><div class="ndot"></div><div class="lb">Чат</div></div>
+        <div class="ni" onclick="sGoTo('s-stats')"><div class="ic">📊</div><div class="lb">Аналіт.</div></div>
+        <div class="ni" onclick="sGoTo('s-profile')"><div class="ic">🏪</div><div class="lb">Профіль</div></div>
+      </div>
+    </div>
+
+    <!-- SALON CHAT CONVERSATION -->
+    <div class="screen" id="s-chat-conv">
+      <div class="chat-conv-hdr">
+        <button class="chat-back" onclick="sGoTo('s-chat')">←</button>
+        <img class="ava ava-sm" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80" alt="Марія">
+        <div class="chat-contact"><div class="chat-contact-name">Марія Коваль</div><div class="chat-contact-status">● Онлайн</div></div>
+        <div style="font-size:20px;cursor:pointer;">📅</div>
+      </div>
+      <div class="chat-msgs">
+        <div class="msg in"><div class="msg-bubble">Добрий день! Хочу уточнити запис на сьогодні</div><div class="msg-time">10:12</div></div>
+        <div class="msg out"><div class="msg-bubble">Доброго дня, Маріє! Так, ваш запис підтверджено: 10:00, манікюр гель-лак, майстер Олена ✨</div><div class="msg-time">10:15</div></div>
+        <div class="msg in"><div class="msg-bubble">Дякую! Чи можна перенести на годину раніше, тобто на 9:00?</div><div class="msg-time">10:24</div></div>
+        <div class="msg out"><div class="msg-bubble">На жаль, о 9:00 майстер Олена вже зайнята. Але є вільний час о 09:30 — підійде?</div><div class="msg-time">10:26</div></div>
+        <div style="text-align:center;font-size:10px;color:var(--text3);margin:4px 0;">Сьогодні</div>
+        <div class="msg in"><div class="msg-bubble">Так, 9:30 ідеально! Дуже дякую 🙏</div><div class="msg-time">10:28</div></div>
+      </div>
+      <div class="chat-input-bar">
+        <input class="chat-input" type="text" placeholder="Написати повідомлення...">
+        <button class="chat-send">↑</button>
+      </div>
+    </div>
+
+    <!-- SALON PROFILE -->
+    <div class="screen" id="s-profile">
+      <div class="s-prof-hdr">
+        <div class="prof-hdr-content">
+          <div class="prof-logo">✂️</div>
+          <div class="prof-name-block"><div class="pn">Atelier Belle</div><div class="ps">вул. Саксаганського, 12</div></div>
+          <button class="prof-edit-btn">Редагувати</button>
+        </div>
+      </div>
+      <div class="prof-stats-row">
+        <div class="ps-cell"><div class="ps-val">4.9</div><div class="ps-lbl">Рейтинг</div></div>
+        <div class="ps-cell"><div class="ps-val">218</div><div class="ps-lbl">Відгуки</div></div>
+        <div class="ps-cell"><div class="ps-val">4</div><div class="ps-lbl">Майстри</div></div>
+        <div class="ps-cell"><div class="ps-val">12</div><div class="ps-lbl">Послуг</div></div>
+      </div>
+      <div class="prof-section">
+        <div class="prof-section-title">Інформація</div>
+        <div class="prof-field"><div><div class="pf-label">Назва</div><div class="pf-value">Atelier Belle</div></div><div class="pf-arrow">›</div></div>
+        <div class="prof-field"><div><div class="pf-label">Адреса</div><div class="pf-value">вул. Саксаганського, 12</div></div><div class="pf-arrow">›</div></div>
+        <div class="prof-field"><div><div class="pf-label">Час роботи</div><div class="pf-value">09:00 — 21:00, Пн–Нд</div></div><div class="pf-arrow">›</div></div>
+        <div class="prof-field"><div><div class="pf-label">Телефон</div><div class="pf-value">+38 (050) 123-45-67</div></div><div class="pf-arrow">›</div></div>
+      </div>
+      <div class="div"></div>
+      <div class="prof-section">
+        <div class="prof-section-title">Галерея</div>
+        <div class="gallery-row">
+          <div class="gallery-thumb"><img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=200&q=80" alt=""></div>
+          <div class="gallery-thumb"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=200&q=80" alt=""></div>
+          <div class="gallery-thumb"><img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?w=200&q=80" alt=""></div>
+          <div class="gallery-thumb"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=200&q=80" alt=""></div>
+          <div class="gallery-add">+</div>
+        </div>
+      </div>
+      <div class="div"></div>
+      <div class="prof-section">
+        <div class="prof-section-title">Налаштування</div>
+        <div class="prof-field"><div><div class="pf-label">Сповіщення</div><div class="pf-value">Увімкнено</div></div><div class="pf-arrow">›</div></div>
+        <div class="prof-field"><div><div class="pf-label">Онлайн-запис</div><div class="pf-value">Активний</div></div><div class="pf-arrow">›</div></div>
+        <div class="prof-field" style="cursor:pointer;" onclick="sGoTo('s-services')"><div><div class="pf-label">Послуги та ціни</div><div class="pf-value">12 послуг</div></div><div class="pf-arrow">›</div></div>
+        <div style="height:80px;"></div>
+      </div>
+      <div class="bnav">
+        <div class="ni" onclick="sGoTo('s-dash')"><div class="ic">🏠</div><div class="lb">Головна</div></div>
+        <div class="ni" onclick="sGoTo('s-calendar')"><div class="ic">📅</div><div class="lb">Розклад</div></div>
+        <div class="ni" onclick="sGoTo('s-team')"><div class="ic">👥</div><div class="lb">Команда</div></div>
+        <div class="ni" onclick="sGoTo('s-stats')"><div class="ic">📊</div><div class="lb">Аналіт.</div></div>
+        <div class="ni on"><div class="ic">🏪</div><div class="ndot"></div><div class="lb">Профіль</div></div>
+      </div>
+    </div>
+
+    <!-- SALON SERVICES -->
+    <div class="screen" id="s-services">
+      <div class="s-svc-hdr">
+        <div class="sb" style="padding:0;height:auto;margin-bottom:14px;"><span>9:41</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <button class="chat-back" onclick="sGoTo('s-profile')">←</button>
+            <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--text)">Послуги</div>
+          </div>
+          <button class="btn btn-ghost" style="font-size:11px;padding:8px 14px;">+ Додати</button>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="svc-cat-name">Нігті</div>
+        <div class="svc-row"><div class="sr-ico">💅</div><div class="sr-info"><div class="sr-name">Манікюр класичний</div><div class="sr-meta">⏱ 60 хв · Всі майстри</div></div><div class="sr-price">280 ₴</div><div class="sr-edit">⋯</div></div>
+        <div class="svc-row"><div class="sr-ico">💎</div><div class="sr-info"><div class="sr-name">Гель-лак покриття</div><div class="sr-meta">⏱ 90 хв · Олена, Тетяна</div></div><div class="sr-price">420 ₴</div><div class="sr-edit">⋯</div></div>
+        <div class="svc-row"><div class="sr-ico">✨</div><div class="sr-info"><div class="sr-name">Нарощування нігтів</div><div class="sr-meta">⏱ 150 хв · Олена</div></div><div class="sr-price">850 ₴</div><div class="sr-edit">⋯</div></div>
+        <div class="svc-cat-name">Волосся</div>
+        <div class="svc-row"><div class="sr-ico">✂️</div><div class="sr-info"><div class="sr-name">Жіноча стрижка</div><div class="sr-meta">⏱ 60 хв · Анна, Тетяна</div></div><div class="sr-price">450 ₴</div><div class="sr-edit">⋯</div></div>
+        <div class="svc-row"><div class="sr-ico">🎨</div><div class="sr-info"><div class="sr-name">Фарбування</div><div class="sr-meta">⏱ 120 хв · Анна, Тетяна</div></div><div class="sr-price">890 ₴</div><div class="sr-edit">⋯</div></div>
+        <div class="svc-row"><div class="sr-ico">🌿</div><div class="sr-info"><div class="sr-name">Кератинове лікування</div><div class="sr-meta">⏱ 180 хв · Тетяна</div></div><div class="sr-price">1 800 ₴</div><div class="sr-edit">⋯</div></div>
+        <div class="svc-cat-name">Обличчя</div>
+        <div class="svc-row"><div class="sr-ico">💆</div><div class="sr-info"><div class="sr-name">Чистка обличчя</div><div class="sr-meta">⏱ 90 хв · Анна</div></div><div class="sr-price">650 ₴</div><div class="sr-edit">⋯</div></div>
+        <div class="svc-row"><div class="sr-ico">💋</div><div class="sr-info"><div class="sr-name">Макіяж</div><div class="sr-meta">⏱ 60 хв · Анна</div></div><div class="sr-price">500 ₴</div><div class="sr-edit">⋯</div></div>
+        <button class="add-svc-btn">+ Додати нову послугу</button>
+        <div style="height:40px;"></div>
+      </div>
+    </div>
+
+  </div><!-- /salon phone -->
+</div><!-- /salon phone-wrap -->
+
+
+<!-- ═══════════ MASTER PHONE ═══════════ -->
+<div class="phone-wrap">
+  <div class="phone-label">Майстер / Особистий кабінет</div>
+  <div class="phone">
+    <div class="notch"><div class="notch-cam"></div></div>
+
+    <!-- MASTER SPLASH -->
+    <div class="screen active" id="m-splash">
+      <div class="ms-hero">
+        <div class="ms-hero-content">
+          <div class="ss-tag"><div class="ss-tag-dot" style="background:var(--violet)"></div><span class="ss-tag-txt" style="color:var(--violet)">Особистий кабінет</span></div>
+          <div class="ss-salon-name" style="color:var(--text);">Кабінет <em style="color:#B8A0E8;">майстра</em></div>
+          <div class="ss-salon-sub">Олена Іванова · Манікюрист</div>
+        </div>
+      </div>
+      <div class="ss-actions">
+        <button class="btn" style="background:linear-gradient(135deg,#9B7FD4,#6B4FD4);color:var(--bg);border-radius:18px;padding:17px;width:100%;font-size:13px;font-weight:500;letter-spacing:.5px;box-shadow:0 6px 20px rgba(155,127,212,.3);" onclick="mGoTo('m-dash')">Відкрити кабінет</button>
+        <div class="ss-or">або</div>
+        <button class="btn btn-outline" onclick="mGoTo('m-dash')">Увійти в інший акаунт</button>
+      </div>
+    </div>
+
+    <!-- MASTER DASHBOARD -->
+    <div class="screen" id="m-dash">
+      <div class="m-dash-hdr">
+        <div class="sb" style="padding:0;height:auto;margin-bottom:14px;"><span>9:41</span><span style="color:var(--text3)">▋▋▋ 🔋</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--text)">Доброго ранку, <em style="color:#B8A0E8;">Олено</em></div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px;">П'ятниця, 28 лютого · Atelier Belle</div>
+          </div>
+          <img class="ava" style="width:44px;height:44px;border-radius:50%;border:2px solid rgba(155,127,212,.3);" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&q=80" alt="Олена">
+        </div>
+        <div class="earnings-card">
+          <div class="ec-label">Мій дохід · Лютий</div>
+          <div class="ec-amount">9 800 ₴</div>
+          <div class="ec-sub">Сьогодні: <span>2 100 ₴</span> · 5 записів</div>
+        </div>
+        <div class="today-row">
+          <div class="today-pill"><div class="tp-val">5</div><div class="tp-lbl">Записів</div></div>
+          <div class="today-pill"><div class="tp-val" style="color:var(--violet)">4.9</div><div class="tp-lbl">Рейтинг</div></div>
+          <div class="today-pill"><div class="tp-val" style="color:var(--sage)">2</div><div class="tp-lbl">Вільно</div></div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-hdr"><div class="sh-title">Мій розклад сьогодні</div><div class="sh-link" onclick="mGoTo('m-calendar')">Тиждень</div></div>
+        <div class="mini-schedule">
+          <div class="ms-appt"><div class="msa-dot gold"></div><div class="msa-time">10:00</div><div class="msa-info"><div class="msa-client">Марія Коваль</div><div class="msa-svc">💅 Гель-лак · 90хв</div></div><div class="msa-price">420 ₴</div></div>
+          <div class="ms-appt" style="border-color:rgba(155,127,212,.2)"><div class="msa-dot" style="background:var(--violet)"></div><div class="msa-time">12:00</div><div class="msa-info"><div class="msa-client">Соф'я Бойко</div><div class="msa-svc">💅 Манікюр класичний · 60хв</div></div><div class="msa-price">280 ₴</div></div>
+          <div class="ms-appt"><div class="msa-dot sage"></div><div class="msa-time">14:00</div><div class="msa-info"><div class="msa-client">Вільний слот</div><div class="msa-svc">Доступно для запису</div></div><div class="msa-price" style="color:var(--text3)">—</div></div>
+          <div class="ms-appt"><div class="msa-dot gold"></div><div class="msa-time">15:30</div><div class="msa-info"><div class="msa-client">Вікторія Зінченко</div><div class="msa-svc">✨ Нарощування · 150хв</div></div><div class="msa-price">850 ₴</div></div>
+          <div class="ms-appt"><div class="msa-dot rose"></div><div class="msa-time">18:00</div><div class="msa-info"><div class="msa-client">Тетяна Мороз</div><div class="msa-svc">💎 Корекція + гель-лак · 90хв</div></div><div class="msa-price">520 ₴</div></div>
+        </div>
+      </div>
+      <div style="height:80px;"></div>
+      <div class="bnav">
+        <div class="ni on"><div class="ic">🏠</div><div class="ndot" style="background:var(--violet)"></div><div class="lb">Головна</div></div>
+        <div class="ni" onclick="mGoTo('m-calendar')"><div class="ic">📅</div><div class="lb">Розклад</div></div>
+        <div class="ni" onclick="mGoTo('m-chat')"><div class="ic">💬</div><div class="lb">Чат</div></div>
+        <div class="ni" onclick="mGoTo('m-stats')"><div class="ic">📊</div><div class="lb">Дохід</div></div>
+        <div class="ni" onclick="mGoTo('m-profile')"><div class="ic">👤</div><div class="lb">Профіль</div></div>
+      </div>
+    </div>
+
+    <!-- MASTER CALENDAR -->
+    <div class="screen" id="m-calendar">
+      <div class="s-cal-hdr">
+        <div class="sb" style="padding:0;height:auto;margin-bottom:14px;"><span>9:41</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--text)">Мій розклад</div><div style="font-size:12px;color:var(--text3);margin-top:2px;">Лютий 2025</div></div>
+          <button class="btn btn-ghost" style="font-size:11px;padding:8px 14px;">Блокування</button>
+        </div>
+        <div class="cal-week" style="margin-top:16px;">
+          <div class="cw-day" onclick="selDay(this)"><div class="wd">Пн</div><div class="wn">24</div><div class="cw-dot"></div></div>
+          <div class="cw-day" onclick="selDay(this)"><div class="wd">Вт</div><div class="wn">25</div><div class="cw-dot"><div class="cdot g"></div><div class="cdot g"></div></div></div>
+          <div class="cw-day" onclick="selDay(this)"><div class="wd">Ср</div><div class="wn">26</div><div class="cw-dot"><div class="cdot g"></div><div class="cdot s"></div></div></div>
+          <div class="cw-day today" onclick="selDay(this)"><div class="wd">Чт</div><div class="wn">27</div><div class="cw-dot"><div class="cdot g"></div></div></div>
+          <div class="cw-day on" onclick="selDay(this)" style="background:var(--violet-bg);border-color:rgba(155,127,212,.25)"><div class="wd" style="color:var(--violet)">Пт</div><div class="wn" style="color:var(--violet)">28</div><div class="cw-dot"><div class="cdot g"></div><div class="cdot g"></div><div class="cdot g"></div></div></div>
+          <div class="cw-day" onclick="selDay(this)"><div class="wd">Сб</div><div class="wn">1</div><div class="cw-dot"><div class="cdot g"></div><div class="cdot g"></div></div></div>
+          <div class="cw-day" onclick="selDay(this)" style="opacity:.4"><div class="wd">Нд</div><div class="wn">2</div><div class="cw-dot"></div></div>
+        </div>
+      </div>
+      <div class="timeline" style="padding-top:12px;">
+        <div class="tl-row"><div class="tl-time">09:00</div><div class="tl-line"></div><div class="tl-slot"><div class="tl-empty"><span>Вільно</span></div></div></div>
+        <div class="tl-row"><div class="tl-time">10:00</div><div class="tl-line"></div><div class="tl-slot"><div class="tl-block gold"><div class="tb-client">Марія Коваль</div><div class="tb-svc">💅 Гель-лак · 90хв · 420 ₴</div></div></div></div>
+        <div class="tl-row"><div class="tl-time">12:00</div><div class="tl-line"></div><div class="tl-slot"><div class="tl-block" style="background:var(--violet-bg);border-color:var(--violet)"><div class="tb-client">Соф'я Бойко</div><div class="tb-svc">💅 Манікюр · 60хв · 280 ₴</div></div></div></div>
+        <div class="tl-row"><div class="tl-time">14:00</div><div class="tl-line"></div><div class="tl-slot"><div class="tl-empty"><span>+ Вільний слот</span></div></div></div>
+        <div class="tl-row"><div class="tl-time">15:30</div><div class="tl-line"></div><div class="tl-slot"><div class="tl-block gold"><div class="tb-client">Вікторія Зінченко</div><div class="tb-svc">✨ Нарощування · 150хв · 850 ₴</div></div></div></div>
+        <div class="tl-row"><div class="tl-time">18:00</div><div class="tl-line"></div><div class="tl-slot"><div class="tl-block rose"><div class="tb-client">Тетяна Мороз</div><div class="tb-svc">💎 Корекція + гель-лак · 90хв · 520 ₴</div></div></div></div>
+        <div style="height:80px;"></div>
+      </div>
+      <div class="bnav">
+        <div class="ni" onclick="mGoTo('m-dash')"><div class="ic">🏠</div><div class="lb">Головна</div></div>
+        <div class="ni on"><div class="ic">📅</div><div class="ndot" style="background:var(--violet)"></div><div class="lb">Розклад</div></div>
+        <div class="ni" onclick="mGoTo('m-chat')"><div class="ic">💬</div><div class="lb">Чат</div></div>
+        <div class="ni" onclick="mGoTo('m-stats')"><div class="ic">📊</div><div class="lb">Дохід</div></div>
+        <div class="ni" onclick="mGoTo('m-profile')"><div class="ic">👤</div><div class="lb">Профіль</div></div>
+      </div>
+    </div>
+
+    <!-- MASTER STATS -->
+    <div class="screen" id="m-stats">
+      <div class="s-stats-hdr">
+        <div class="sb" style="padding:0;height:auto;margin-bottom:14px;"><span>9:41</span></div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--text)">Мій дохід</div>
+        <div class="period-tabs" style="margin-top:12px;">
+          <div class="ptab">7 днів</div>
+          <div class="ptab on" style="background:var(--violet-bg);border-color:rgba(155,127,212,.3);color:var(--violet)">Місяць</div>
+          <div class="ptab">Квартал</div>
+          <div class="ptab">Рік</div>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="big-stat" style="background:linear-gradient(135deg,rgba(155,127,212,.07),rgba(201,169,110,.05));border-color:rgba(155,127,212,.15)">
+          <div class="bs-top">
+            <div><div class="bs-label">Мій дохід</div><div class="bs-value" style="color:var(--gold2)">9 800 ₴</div></div>
+            <div class="bs-change up">↑ 21%</div>
+          </div>
+          <div class="sparkline">
+            <div class="spark" style="height:30%"></div><div class="spark" style="height:50%"></div><div class="spark" style="height:45%"></div><div class="spark" style="height:75%"></div><div class="spark" style="height:60%"></div><div class="spark" style="height:80%;background:linear-gradient(to top,#4A3090,#9B7FD4);"></div><div class="spark" style="height:70%;background:linear-gradient(to top,#4A3090,#9B7FD4);"></div><div class="spark" style="height:85%;background:linear-gradient(to top,#4A3090,#9B7FD4);"></div><div class="spark" style="height:95%;background:linear-gradient(to top,#4A3090,#9B7FD4);"></div><div class="spark" style="height:78%;background:linear-gradient(to top,#4A3090,#9B7FD4);"></div><div class="spark" style="height:65%"></div><div class="spark" style="height:40%;opacity:.5"></div>
+          </div>
+        </div>
+
+        <!-- Performance ring + stats -->
+        <div style="display:flex;gap:14px;margin-bottom:10px;align-items:center;" class="card" style="padding:18px;">
+          <div class="perf-ring">
+            <svg viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15.9" fill="none" stroke="var(--bg4)" stroke-width="2.5"/>
+              <circle cx="18" cy="18" r="15.9" fill="none" stroke="url(#vgrad)" stroke-width="2.5" stroke-dasharray="87,100" stroke-linecap="round"/>
+              <defs><linearGradient id="vgrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#C9A96E"/><stop offset="100%" stop-color="#9B7FD4"/></linearGradient></defs>
+            </svg>
+            <div class="perf-ring-val"><div class="prv">87%</div><div class="prl">Заповн.</div></div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:8px;padding:18px 14px 18px 4px;">
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text2)"><span>Записів цього місяця</span><strong style="color:var(--text)">24</strong></div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text2)"><span>Нові клієнти</span><strong style="color:var(--sage)">8</strong></div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text2)"><span>Середній чек</span><strong style="color:var(--gold)">408 ₴</strong></div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text2)"><span>Скасувань</span><strong style="color:var(--rose)">2</strong></div>
+          </div>
+        </div>
+
+        <div class="sec-hdr" style="padding:0;margin-bottom:10px;"><div class="sh-title">Топ послуги</div></div>
+        <div class="top-services">
+          <div class="ts-item"><div class="tsi-name">💅 Гель-лак</div><div class="tsi-bar"><div class="tsi-fill" style="width:92%;height:100%;background:linear-gradient(90deg,#9B7FD4,#6B4FD4);border-radius:2px;"></div></div><div class="tsi-meta"><span>12 записів</span><span style="color:var(--violet)">5 040 ₴</span></div></div>
+          <div class="ts-item"><div class="tsi-name">✨ Нарощ.</div><div class="tsi-bar"><div class="tsi-fill" style="width:65%;height:100%;background:linear-gradient(90deg,#C9A96E,#8B6535);border-radius:2px;"></div></div><div class="tsi-meta"><span>6 записів</span><span style="color:var(--gold)">5 100 ₴</span></div></div>
+          <div class="ts-item"><div class="tsi-name">💅 Манікюр</div><div class="tsi-bar"><div class="tsi-fill" style="width:50%;height:100%;background:linear-gradient(90deg,#6FAF88,#3A8055);border-radius:2px;"></div></div><div class="tsi-meta"><span>5 записів</span><span style="color:var(--sage)">1 400 ₴</span></div></div>
+          <div class="ts-item"><div class="tsi-name">💎 Корекція</div><div class="tsi-bar"><div class="tsi-fill" style="width:35%;height:100%;background:linear-gradient(90deg,#CC6070,#9B3A4A);border-radius:2px;"></div></div><div class="tsi-meta"><span>3 записи</span><span style="color:var(--rose)">1 560 ₴</span></div></div>
+        </div>
+        <div style="height:80px;"></div>
+      </div>
+      <div class="bnav">
+        <div class="ni" onclick="mGoTo('m-dash')"><div class="ic">🏠</div><div class="lb">Головна</div></div>
+        <div class="ni" onclick="mGoTo('m-calendar')"><div class="ic">📅</div><div class="lb">Розклад</div></div>
+        <div class="ni" onclick="mGoTo('m-chat')"><div class="ic">💬</div><div class="lb">Чат</div></div>
+        <div class="ni on"><div class="ic">📊</div><div class="ndot" style="background:var(--violet)"></div><div class="lb">Дохід</div></div>
+        <div class="ni" onclick="mGoTo('m-profile')"><div class="ic">👤</div><div class="lb">Профіль</div></div>
+      </div>
+    </div>
+
+    <!-- MASTER CHAT -->
+    <div class="screen" id="m-chat">
+      <div class="s-chat-hdr">
+        <div class="sb" style="padding:0;height:auto;margin-bottom:14px;"><span>9:41</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--text)">Мої клієнти</div>
+          <span class="badge violet">2 нові</span>
+        </div>
+      </div>
+      <div style="background:var(--bg2);border-bottom:1px solid var(--border);">
+        <div class="chat-list-item" onclick="mGoTo('m-chat-conv')">
+          <div class="cli-av"><img class="ava ava-md" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80" alt="Марія"><div class="cli-badge" style="background:var(--violet)">1</div></div>
+          <div class="cli-info"><div class="cli-name">Марія Коваль</div><div class="cli-preview">Результат просто 🔥 дякую! Запишіть мене знову</div></div>
+          <div class="cli-meta"><div class="cli-time">10:45</div><div class="cli-unread" style="background:var(--violet)">1</div></div>
+        </div>
+        <div class="chat-list-item" onclick="mGoTo('m-chat-conv')">
+          <div class="cli-av"><img class="ava ava-md" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=80" alt="Вікторія"><div class="cli-badge" style="background:var(--violet)">1</div></div>
+          <div class="cli-info"><div class="cli-name">Вікторія Зінченко</div><div class="cli-preview">Підтверджую на 15:30 сьогодні!</div></div>
+          <div class="cli-meta"><div class="cli-time">09:30</div><div class="cli-unread" style="background:var(--violet)">1</div></div>
+        </div>
+        <div class="chat-list-item">
+          <div class="cli-av"><img class="ava ava-md" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80" alt="Соф'я"></div>
+          <div class="cli-info"><div class="cli-name">Соф'я Бойко</div><div class="cli-preview">Добре, побачимось о 12:00!</div></div>
+          <div class="cli-meta"><div class="cli-time">вчора</div></div>
+        </div>
+        <div class="chat-list-item">
+          <div class="cli-av"><img class="ava ava-md" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&q=80" alt="Тетяна"></div>
+          <div class="cli-info"><div class="cli-name">Тетяна Мороз</div><div class="cli-preview">Можна записатися на наступний тиждень?</div></div>
+          <div class="cli-meta"><div class="cli-time">вчора</div></div>
+        </div>
+      </div>
+      <div class="bnav">
+        <div class="ni" onclick="mGoTo('m-dash')"><div class="ic">🏠</div><div class="lb">Головна</div></div>
+        <div class="ni" onclick="mGoTo('m-calendar')"><div class="ic">📅</div><div class="lb">Розклад</div></div>
+        <div class="ni on"><div class="ic">💬</div><div class="ndot" style="background:var(--violet)"></div><div class="lb">Чат</div></div>
+        <div class="ni" onclick="mGoTo('m-stats')"><div class="ic">📊</div><div class="lb">Дохід</div></div>
+        <div class="ni" onclick="mGoTo('m-profile')"><div class="ic">👤</div><div class="lb">Профіль</div></div>
+      </div>
+    </div>
+
+    <!-- MASTER CHAT CONV -->
+    <div class="screen" id="m-chat-conv">
+      <div class="chat-conv-hdr">
+        <button class="chat-back" onclick="mGoTo('m-chat')">←</button>
+        <img class="ava ava-sm" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80" alt="Марія">
+        <div class="chat-contact"><div class="chat-contact-name">Марія Коваль</div><div class="chat-contact-status" style="color:var(--violet)">● Онлайн</div></div>
+        <div style="font-size:20px;cursor:pointer;">📅</div>
+      </div>
+      <div class="chat-msgs">
+        <div class="msg out"><div class="msg-bubble">Маріє, нагадую що ваш запис сьогодні о 10:00. Чекаю! 💅</div><div class="msg-time">09:00</div></div>
+        <div class="msg in"><div class="msg-bubble">Дякую за нагадування! Обов'язково буду</div><div class="msg-time">09:15</div></div>
+        <div class="msg in"><div class="msg-bubble">До речі, хочу спробувати новий дизайн з квіточками, бачила у вас в інстаграмі 🌸</div><div class="msg-time">09:16</div></div>
+        <div class="msg out"><div class="msg-bubble">Чудово! Принесу відповідний гель. Буде красиво ✨ До зустрічі!</div><div class="msg-time">09:20</div></div>
+        <div style="text-align:center;font-size:10px;color:var(--text3);margin:4px 0;">Після запису</div>
+        <div class="msg in"><div class="msg-bubble">Результат просто 🔥 дякую! Запишіть мене знову на наступний місяць</div><div class="msg-time">11:50</div></div>
+      </div>
+      <div class="chat-input-bar">
+        <input class="chat-input" type="text" placeholder="Написати повідомлення...">
+        <button class="chat-send" style="background:linear-gradient(135deg,#9B7FD4,#6B4FD4)">↑</button>
+      </div>
+    </div>
+
+    <!-- MASTER PROFILE — tabbed -->
+    <div class="screen" id="m-profile" style="display:flex;flex-direction:column;overflow:hidden;">
+
+      <!-- Hero -->
+      <div class="m-prof-hero" style="flex-shrink:0;">
+        <div class="mph-content">
+          <div class="mph-av"><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=160&q=80" alt="Олена"></div>
+          <div class="mph-info">
+            <div class="mn">Олена Іванова</div>
+            <div class="mr">Манікюрист · Atelier Belle</div>
+            <div class="master-rating"><span class="mr-stars">★★★★★</span><span class="mr-val">4.9 · 186 відгуків</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="prof-stats-row" style="flex-shrink:0;">
+        <div class="ps-cell"><div class="ps-val">4.9</div><div class="ps-lbl">Рейтинг</div></div>
+        <div class="ps-cell"><div class="ps-val">186</div><div class="ps-lbl">Відгуки</div></div>
+        <div class="ps-cell"><div class="ps-val">420+</div><div class="ps-lbl">Клієнтів</div></div>
+        <div class="ps-cell"><div class="ps-val">3р</div><div class="ps-lbl">Досвід</div></div>
+      </div>
+
+      <!-- Profile sub-tabs -->
+      <div style="display:flex;gap:0;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0;overflow-x:auto;scrollbar-width:none;">
+        <button class="prof-stab on" id="pst-info"    onclick="switchProfTab('info')"     >👤 Профіль</button>
+        <button class="prof-stab"    id="pst-schedule" onclick="switchProfTab('schedule')" >⏰ Графік</button>
+        <button class="prof-stab"    id="pst-clients"  onclick="switchProfTab('clients')"  >🗂 Клієнти</button>
+        <button class="prof-stab"    id="pst-waitlist" onclick="switchProfTab('waitlist')" >⏳ Черга</button>
+      </div>
+
+      <!-- ── TAB: INFO ── -->
+      <div id="ptab-info" class="prof-tab-body">
+        <div class="prof-section">
+          <div class="prof-section-title">Спеціалізації</div>
+          <div class="skills-row">
+            <div class="skill-tag" style="background:var(--violet-bg);border-color:rgba(155,127,212,.2);color:var(--violet)">💅 Манікюр</div>
+            <div class="skill-tag" style="background:var(--violet-bg);border-color:rgba(155,127,212,.2);color:var(--violet)">💎 Гель-лак</div>
+            <div class="skill-tag">✨ Нарощування</div>
+            <div class="skill-tag">🦶 Педикюр</div>
+            <div class="skill-tag">🎨 Nail-art</div>
+          </div>
+        </div>
+        <div class="div"></div>
+        <div class="prof-section">
+          <div class="prof-section-title">Особисті дані</div>
+          <div class="prof-field"><div><div class="pf-label">Ім'я та прізвище</div><div class="pf-value">Олена Іванова</div></div><div class="pf-arrow">›</div></div>
+          <div class="prof-field"><div><div class="pf-label">Телефон</div><div class="pf-value">+38 (067) 234-56-78</div></div><div class="pf-arrow">›</div></div>
+          <div class="prof-field"><div><div class="pf-label">Instagram</div><div class="pf-value">@elena_nails_kyiv</div></div><div class="pf-arrow">›</div></div>
+          <div class="prof-field" onclick="mGoTo('m-services')"><div><div class="pf-label">Мої послуги та ціни</div><div class="pf-value">6 послуг</div></div><div class="pf-arrow">›</div></div>
+        </div>
+        <div class="div"></div>
+        <div class="prof-section">
+          <div class="prof-section-title">Галерея робіт</div>
+          <div class="gallery-row">
+            <div class="gallery-thumb"><img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=200&q=80" alt=""></div>
+            <div class="gallery-thumb"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=200&q=80" alt=""></div>
+            <div class="gallery-thumb"><img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?w=200&q=80" alt=""></div>
+            <div class="gallery-add">+</div>
+          </div>
+        </div>
+        <div style="height:20px;"></div>
+      </div>
+
+      <!-- ── TAB: SCHEDULE SETTINGS ── -->
+      <div id="ptab-schedule" class="prof-tab-body" style="display:none;">
+
+        <!-- Buffer time -->
+        <div class="sched-section">
+          <div class="sched-section-title">⏱ Перерва між записами</div>
+          <div class="sched-card">
+            <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">Автоматично додавати паузу після кожного клієнта</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <div class="buffer-pill" onclick="selBuffer(this)">0 хв</div>
+              <div class="buffer-pill on" onclick="selBuffer(this)">10 хв</div>
+              <div class="buffer-pill" onclick="selBuffer(this)">15 хв</div>
+              <div class="buffer-pill" onclick="selBuffer(this)">20 хв</div>
+              <div class="buffer-pill" onclick="selBuffer(this)">30 хв</div>
+            </div>
+            <div style="margin-top:10px;font-size:11px;color:var(--text3);">💡 Активно: <span style="color:var(--gold);">10 хв після кожного запису</span></div>
+          </div>
+        </div>
+
+        <!-- Weekly schedule -->
+        <div class="sched-section">
+          <div class="sched-section-title">📅 Графік по днях тижня</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div class="day-row" id="dr-mon"><div class="day-toggle on" onclick="toggleDay('dr-mon')"><div class="day-name">Пн</div><div class="day-switch on"><div class="day-knob"></div></div></div><div class="day-hours"><input class="time-inp" value="09:00"><span style="color:var(--text3);">—</span><input class="time-inp" value="19:00"></div></div>
+            <div class="day-row" id="dr-tue"><div class="day-toggle on" onclick="toggleDay('dr-tue')"><div class="day-name">Вт</div><div class="day-switch on"><div class="day-knob"></div></div></div><div class="day-hours"><input class="time-inp" value="09:00"><span style="color:var(--text3);">—</span><input class="time-inp" value="19:00"></div></div>
+            <div class="day-row" id="dr-wed"><div class="day-toggle on" onclick="toggleDay('dr-wed')"><div class="day-name">Ср</div><div class="day-switch on"><div class="day-knob"></div></div></div><div class="day-hours"><input class="time-inp" value="10:00"><span style="color:var(--text3);">—</span><input class="time-inp" value="20:00"></div></div>
+            <div class="day-row" id="dr-thu"><div class="day-toggle on" onclick="toggleDay('dr-thu')"><div class="day-name">Чт</div><div class="day-switch on"><div class="day-knob"></div></div></div><div class="day-hours"><input class="time-inp" value="09:00"><span style="color:var(--text3);">—</span><input class="time-inp" value="19:00"></div></div>
+            <div class="day-row" id="dr-fri"><div class="day-toggle on" onclick="toggleDay('dr-fri')"><div class="day-name">Пт</div><div class="day-switch on"><div class="day-knob"></div></div></div><div class="day-hours"><input class="time-inp" value="09:00"><span style="color:var(--text3);">—</span><input class="time-inp" value="21:00"></div></div>
+            <div class="day-row off" id="dr-sat"><div class="day-toggle" onclick="toggleDay('dr-sat')"><div class="day-name">Сб</div><div class="day-switch"><div class="day-knob"></div></div></div><div class="day-hours off-hours"><span style="font-size:11px;color:var(--text3);">Вихідний</span></div></div>
+            <div class="day-row off" id="dr-sun"><div class="day-toggle" onclick="toggleDay('dr-sun')"><div class="day-name">Нд</div><div class="day-switch"><div class="day-knob"></div></div></div><div class="day-hours off-hours"><span style="font-size:11px;color:var(--text3);">Вихідний</span></div></div>
+          </div>
+        </div>
+
+        <!-- Blocked dates in month -->
+        <div class="sched-section">
+          <div class="sched-section-title">🚫 Заблоковані дати (лютий)</div>
+          <div class="sched-card" style="padding:12px;">
+            <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;margin-bottom:6px;">
+              <div style="font-size:8px;color:var(--text3);padding:2px;">Пн</div><div style="font-size:8px;color:var(--text3);">Вт</div><div style="font-size:8px;color:var(--text3);">Ср</div><div style="font-size:8px;color:var(--text3);">Чт</div><div style="font-size:8px;color:var(--text3);">Пт</div><div style="font-size:8px;color:var(--text3);">Сб</div><div style="font-size:8px;color:var(--text3);">Нд</div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;">
+              <div class="mini-cal-d"></div><div class="mini-cal-d"></div><div class="mini-cal-d"></div><div class="mini-cal-d"></div>
+              <div class="mini-cal-d avail">1</div><div class="mini-cal-d off-day">2</div><div class="mini-cal-d off-day">3</div>
+              <div class="mini-cal-d avail">4</div><div class="mini-cal-d avail">5</div><div class="mini-cal-d avail">6</div><div class="mini-cal-d avail">7</div><div class="mini-cal-d avail">8</div><div class="mini-cal-d off-day">9</div><div class="mini-cal-d off-day">10</div>
+              <div class="mini-cal-d avail">11</div><div class="mini-cal-d avail">12</div><div class="mini-cal-d avail">13</div><div class="mini-cal-d avail">14</div><div class="mini-cal-d avail">15</div><div class="mini-cal-d off-day">16</div><div class="mini-cal-d off-day">17</div>
+              <div class="mini-cal-d avail">18</div><div class="mini-cal-d avail">19</div><div class="mini-cal-d blocked" onclick="toggleBlock(this)">20</div><div class="mini-cal-d avail">21</div><div class="mini-cal-d avail today-d">22</div><div class="mini-cal-d off-day">23</div><div class="mini-cal-d off-day">24</div>
+              <div class="mini-cal-d avail">25</div><div class="mini-cal-d avail">26</div><div class="mini-cal-d avail">27</div><div class="mini-cal-d today-d avail">28</div>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:10px;font-size:9px;">
+              <div style="display:flex;align-items:center;gap:4px;color:var(--text3);"><div style="width:8px;height:8px;background:var(--sage-bg);border-radius:3px;border:1px solid var(--sage);"></div>Доступно</div>
+              <div style="display:flex;align-items:center;gap:4px;color:var(--text3);"><div style="width:8px;height:8px;background:var(--rose-bg);border-radius:3px;border:1px solid var(--rose);"></div>Заблоковано</div>
+              <div style="display:flex;align-items:center;gap:4px;color:var(--text3);"><div style="width:8px;height:8px;background:var(--bg4);border-radius:3px;"></div>Вихідний</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service-specific duration -->
+        <div class="sched-section">
+          <div class="sched-section-title">⚙️ Тривалість послуг</div>
+          <div style="font-size:11px;color:var(--text3);margin-bottom:10px;">Налаштуйте індивідуальний час для кожної послуги</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div class="svc-dur-row"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:16px;">💅</span><div><div style="font-size:12px;font-weight:500;color:var(--text);">Манікюр класичний</div><div style="font-size:10px;color:var(--text3);">Буфер: 10 хв після</div></div></div><div style="display:flex;align-items:center;gap:6px;"><button class="dur-btn" onclick="changeDur(this,-10)">−</button><span class="dur-val">60</span><span style="font-size:10px;color:var(--text3);">хв</span><button class="dur-btn" onclick="changeDur(this,10)">+</button></div></div>
+            <div class="svc-dur-row"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:16px;">💎</span><div><div style="font-size:12px;font-weight:500;color:var(--text);">Гель-лак</div><div style="font-size:10px;color:var(--text3);">Буфер: 10 хв після</div></div></div><div style="display:flex;align-items:center;gap:6px;"><button class="dur-btn" onclick="changeDur(this,-10)">−</button><span class="dur-val">90</span><span style="font-size:10px;color:var(--text3);">хв</span><button class="dur-btn" onclick="changeDur(this,10)">+</button></div></div>
+            <div class="svc-dur-row"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:16px;">✨</span><div><div style="font-size:12px;font-weight:500;color:var(--text);">Нарощування</div><div style="font-size:10px;color:var(--text3);">Буфер: 15 хв після</div></div></div><div style="display:flex;align-items:center;gap:6px;"><button class="dur-btn" onclick="changeDur(this,-10)">−</button><span class="dur-val">150</span><span style="font-size:10px;color:var(--text3);">хв</span><button class="dur-btn" onclick="changeDur(this,10)">+</button></div></div>
+            <div class="svc-dur-row"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:16px;">🦶</span><div><div style="font-size:12px;font-weight:500;color:var(--text);">Педикюр</div><div style="font-size:10px;color:var(--text3);">Буфер: 10 хв після</div></div></div><div style="display:flex;align-items:center;gap:6px;"><button class="dur-btn" onclick="changeDur(this,-10)">−</button><span class="dur-val">75</span><span style="font-size:10px;color:var(--text3);">хв</span><button class="dur-btn" onclick="changeDur(this,10)">+</button></div></div>
+          </div>
+        </div>
+
+        <div style="padding:0 16px 16px;">
+          <button style="width:100%;padding:14px;background:var(--grad-gold);border:none;border-radius:14px;color:var(--bg);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 6px 20px rgba(201,169,110,.25);">✓ Зберегти графік</button>
+        </div>
+        <div style="height:20px;"></div>
+      </div>
+
+      <!-- ── TAB: CLIENTS ── -->
+      <div id="ptab-clients" class="prof-tab-body" style="display:none;">
+        <div style="padding:12px 16px 8px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:11px;color:var(--text3);">420 клієнтів · відсортовано за активністю</div>
+          <div style="display:flex;gap:4px;">
+            <div class="client-filter-pill on">Всі</div>
+            <div class="client-filter-pill">Постійні</div>
+            <div class="client-filter-pill">Нові</div>
+          </div>
+        </div>
+        <!-- search -->
+        <div style="padding:0 16px 10px;"><div style="display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:9px 13px;"><span style="font-size:13px;color:var(--text3);">🔍</span><input style="flex:1;border:none;background:none;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);outline:none;" placeholder="Пошук клієнта..."></div></div>
+
+        <!-- client list -->
+        <div style="display:flex;flex-direction:column;">
+          <div class="client-row" onclick="mGoTo('m-client-detail')">
+            <img class="ava ava-md" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80" alt="Марія">
+            <div style="flex:1;">
+              <div style="font-size:13px;font-weight:500;color:var(--text);">Марія Коваль</div>
+              <div style="font-size:10px;color:var(--text3);margin-top:2px;">💅 Гель-лак · Остання: 28 лют</div>
+              <div style="display:flex;gap:4px;margin-top:4px;">
+                <div class="badge violet" style="font-size:9px;">Постійна · 12 візитів</div>
+              </div>
+            </div>
+            <div style="text-align:right;"><div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);">5 040 ₴</div><div style="font-size:9px;color:var(--text3);margin-top:2px;">за весь час</div></div>
+          </div>
+          <div class="client-row" onclick="mGoTo('m-client-detail')">
+            <img class="ava ava-md" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=80" alt="Вікторія">
+            <div style="flex:1;">
+              <div style="font-size:13px;font-weight:500;color:var(--text);">Вікторія Зінченко</div>
+              <div style="font-size:10px;color:var(--text3);margin-top:2px;">✨ Нарощування · Остання: 25 лют</div>
+              <div style="display:flex;gap:4px;margin-top:4px;">
+                <div class="badge gold" style="font-size:9px;">VIP · 8 візитів</div>
+              </div>
+            </div>
+            <div style="text-align:right;"><div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);">6 800 ₴</div><div style="font-size:9px;color:var(--text3);margin-top:2px;">за весь час</div></div>
+          </div>
+          <div class="client-row">
+            <img class="ava ava-md" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80" alt="Соф'я">
+            <div style="flex:1;">
+              <div style="font-size:13px;font-weight:500;color:var(--text);">Соф'я Бойко</div>
+              <div style="font-size:10px;color:var(--text3);margin-top:2px;">💅 Манікюр · Остання: 20 лют</div>
+              <div style="display:flex;gap:4px;margin-top:4px;">
+                <div class="badge sage" style="font-size:9px;">Постійна · 7 візитів</div>
+              </div>
+            </div>
+            <div style="text-align:right;"><div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);">1 960 ₴</div><div style="font-size:9px;color:var(--text3);margin-top:2px;">за весь час</div></div>
+          </div>
+          <div class="client-row">
+            <img class="ava ava-md" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&q=80" alt="Тетяна">
+            <div style="flex:1;">
+              <div style="font-size:13px;font-weight:500;color:var(--text);">Тетяна Мороз</div>
+              <div style="font-size:10px;color:var(--text3);margin-top:2px;">💎 Корекція + гель-лак · 15 лют</div>
+              <div style="display:flex;gap:4px;margin-top:4px;">
+                <div class="badge amber" style="font-size:9px;">Нова · 2 візити</div>
+              </div>
+            </div>
+            <div style="text-align:right;"><div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);">1 040 ₴</div><div style="font-size:9px;color:var(--text3);margin-top:2px;">за весь час</div></div>
+          </div>
+          <div class="client-row">
+            <div class="ava ava-md" style="background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:18px;border-radius:50%;">👤</div>
+            <div style="flex:1;">
+              <div style="font-size:13px;font-weight:500;color:var(--text);">Катерина Поліщук</div>
+              <div style="font-size:10px;color:var(--text3);margin-top:2px;">💅 Манікюр · Остання: 10 лют</div>
+              <div style="display:flex;gap:4px;margin-top:4px;">
+                <div class="badge" style="font-size:9px;background:var(--bg4);color:var(--text3);">Нова · 1 візит</div>
+              </div>
+            </div>
+            <div style="text-align:right;"><div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);">280 ₴</div><div style="font-size:9px;color:var(--text3);margin-top:2px;">за весь час</div></div>
+          </div>
+          <div style="padding:12px 16px;text-align:center;font-size:11px;color:var(--text3);cursor:pointer;">Показати ще 415 клієнтів →</div>
+        </div>
+        <div style="height:20px;"></div>
+      </div>
+
+      <!-- ── TAB: WAITLIST ── -->
+      <div id="ptab-waitlist" class="prof-tab-body" style="display:none;">
+        <div style="padding:12px 16px 10px;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:13px;font-weight:500;color:var(--text);">Лист очікування</div><div style="font-size:11px;color:var(--text3);margin-top:2px;">8 запитів на запис</div></div>
+          <div class="badge rose">3 термінові</div>
+        </div>
+
+        <!-- Waitlist filter -->
+        <div style="display:flex;gap:6px;padding:0 16px 10px;overflow-x:auto;scrollbar-width:none;">
+          <div class="client-filter-pill on">Всі</div>
+          <div class="client-filter-pill">Манікюр</div>
+          <div class="client-filter-pill">Нарощ.</div>
+          <div class="client-filter-pill">Педикюр</div>
+        </div>
+
+        <!-- Waitlist entries -->
+        <div style="display:flex;flex-direction:column;gap:8px;padding:0 16px;">
+
+          <div class="wl-card urgent">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <img class="ava" style="width:36px;height:36px;" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80" alt="Марія">
+                <div><div style="font-size:13px;font-weight:500;color:var(--text);">Марія Коваль</div><div style="font-size:10px;color:var(--text3);">Постійна клієнтка</div></div>
+              </div>
+              <div class="badge rose" style="font-size:9px;">Терміново</div>
+            </div>
+            <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+              <div style="background:var(--bg3);border-radius:8px;padding:5px 9px;font-size:10px;color:var(--text2);">💅 Гель-лак · 90хв</div>
+              <div style="background:var(--bg3);border-radius:8px;padding:5px 9px;font-size:10px;color:var(--text2);">📅 Будь-яка дата</div>
+              <div style="background:var(--bg3);border-radius:8px;padding:5px 9px;font-size:10px;color:var(--text2);">🕐 11:00–16:00</div>
+            </div>
+            <div style="font-size:10px;color:var(--text3);margin-bottom:10px;">💬 «Дуже потрібно до п'ятниці, маю захід»</div>
+            <div style="display:flex;gap:6px;">
+              <button class="wl-btn accept" onclick="acceptWaitlist(this)">✓ Записати на 14:00, 1 бер</button>
+              <button class="wl-btn decline" onclick="declineWaitlist(this)">✕</button>
+            </div>
+          </div>
+
+          <div class="wl-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <img class="ava" style="width:36px;height:36px;" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=80" alt="Вікторія">
+                <div><div style="font-size:13px;font-weight:500;color:var(--text);">Вікторія Зінченко</div><div style="font-size:10px;color:var(--text3);">VIP · запит 2 год тому</div></div>
+              </div>
+              <div class="badge violet" style="font-size:9px;">VIP</div>
+            </div>
+            <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+              <div style="background:var(--bg3);border-radius:8px;padding:5px 9px;font-size:10px;color:var(--text2);">✨ Нарощування · 150хв</div>
+              <div style="background:var(--bg3);border-radius:8px;padding:5px 9px;font-size:10px;color:var(--text2);">📅 3–7 березня</div>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button class="wl-btn accept" onclick="acceptWaitlist(this)">✓ Запропонувати 5 берез., 10:00</button>
+              <button class="wl-btn decline" onclick="declineWaitlist(this)">✕</button>
+            </div>
+          </div>
+
+          <div class="wl-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div class="ava" style="width:36px;height:36px;background:var(--bg4);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;">👤</div>
+                <div><div style="font-size:13px;font-weight:500;color:var(--text);">Оксана Литвиненко</div><div style="font-size:10px;color:var(--text3);">Новий клієнт · 5 год тому</div></div>
+              </div>
+              <div class="badge" style="background:var(--bg4);color:var(--text3);font-size:9px;">Нова</div>
+            </div>
+            <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+              <div style="background:var(--bg3);border-radius:8px;padding:5px 9px;font-size:10px;color:var(--text2);">💅 Манікюр · 60хв</div>
+              <div style="background:var(--bg3);border-radius:8px;padding:5px 9px;font-size:10px;color:var(--text2);">📅 Будь-яка дата</div>
+              <div style="background:var(--bg3);border-radius:8px;padding:5px 9px;font-size:10px;color:var(--text2);">🕐 Вечір, після 17:00</div>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button class="wl-btn accept" onclick="acceptWaitlist(this)">✓ Записати на 18:00, 3 бер</button>
+              <button class="wl-btn decline" onclick="declineWaitlist(this)">✕</button>
+            </div>
+          </div>
+
+          <div class="wl-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <img class="ava" style="width:36px;height:36px;" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80" alt="Ліна">
+                <div><div style="font-size:13px;font-weight:500;color:var(--text);">Ліна Захарченко</div><div style="font-size:10px;color:var(--text3);">3 візити · вчора</div></div>
+              </div>
+              <div class="badge sage" style="font-size:9px;">Постійна</div>
+            </div>
+            <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+              <div style="background:var(--bg3);border-radius:8px;padding:5px 9px;font-size:10px;color:var(--text2);">🦶 Педикюр · 75хв</div>
+              <div style="background:var(--bg3);border-radius:8px;padding:5px 9px;font-size:10px;color:var(--text2);">📅 10–15 берез.</div>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button class="wl-btn accept" onclick="acceptWaitlist(this)">✓ Записати на 12 берез.</button>
+              <button class="wl-btn decline" onclick="declineWaitlist(this)">✕</button>
+            </div>
+          </div>
+
+          <div style="padding:8px 0 4px;display:flex;justify-content:space-between;align-items:center;">
+            <div style="font-size:11px;color:var(--text3);">Ще 4 запити в черзі</div>
+            <div style="font-size:11px;color:var(--gold);cursor:pointer;">Показати всі →</div>
+          </div>
+        </div>
+        <div style="height:20px;"></div>
+      </div>
+
+      <div class="bnav" style="flex-shrink:0;">
+        <div class="ni" onclick="mGoTo('m-dash')"><div class="ic">🏠</div><div class="lb">Головна</div></div>
+        <div class="ni" onclick="mGoTo('m-calendar')"><div class="ic">📅</div><div class="lb">Розклад</div></div>
+        <div class="ni" onclick="mGoTo('m-chat')"><div class="ic">💬</div><div class="lb">Чат</div></div>
+        <div class="ni" onclick="mGoTo('m-stats')"><div class="ic">📊</div><div class="lb">Дохід</div></div>
+        <div class="ni on"><div class="ic">👤</div><div class="ndot" style="background:var(--violet)"></div><div class="lb">Профіль</div></div>
+      </div>
+    </div>
+
+    <!-- MASTER CLIENT DETAIL -->
+    <div class="screen" id="m-client-detail">
+      <div style="background:var(--bg2);padding:44px 20px 18px;border-bottom:1px solid var(--border);">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+          <button class="chat-back" onclick="mGoTo('m-profile');switchProfTab('clients');">←</button>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--text);">Картка клієнта</div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:center;">
+          <img class="ava" style="width:64px;height:64px;" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&q=80" alt="Марія">
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--text);">Марія Коваль</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:3px;">📞 +38 (096) 321-54-87</div>
+            <div style="display:flex;gap:6px;margin-top:6px;">
+              <div class="badge violet">Постійна</div>
+              <div class="badge gold">12 візитів</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:0;background:var(--bg2);border-bottom:1px solid var(--border);">
+        <div style="flex:1;padding:12px;text-align:center;border-right:1px solid var(--border);"><div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);">5 040</div><div style="font-size:9px;color:var(--text3);margin-top:3px;">₴ ВИТРАЧЕНО</div></div>
+        <div style="flex:1;padding:12px;text-align:center;border-right:1px solid var(--border);"><div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--text);">12</div><div style="font-size:9px;color:var(--text3);margin-top:3px;">ВІЗИТІВ</div></div>
+        <div style="flex:1;padding:12px;text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--sage);">4.9</div><div style="font-size:9px;color:var(--text3);margin-top:3px;">РЕЙТИНГ</div></div>
+      </div>
+      <div style="padding:16px 20px 0;">
+        <div style="font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">Нотатки майстра</div>
+        <textarea style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:12px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--text);outline:none;resize:none;height:68px;" placeholder="Особливості, алергії, вподобання...">Любить французький манікюр. Алергія на акрил — тільки гель.</textarea>
+        <div style="font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 10px;">Історія візитів</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div style="background:var(--bg2);border-radius:12px;padding:11px 13px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:12px;font-weight:500;color:var(--text);">💅 Гель-лак</div><div style="font-size:10px;color:var(--text3);margin-top:2px;">28 лютого 2025</div></div><div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);">420 ₴</div></div>
+          <div style="background:var(--bg2);border-radius:12px;padding:11px 13px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:12px;font-weight:500;color:var(--text);">💅 Гель-лак + дизайн</div><div style="font-size:10px;color:var(--text3);margin-top:2px;">31 січня 2025</div></div><div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);">570 ₴</div></div>
+          <div style="background:var(--bg2);border-radius:12px;padding:11px 13px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:12px;font-weight:500;color:var(--text);">✨ Нарощування</div><div style="font-size:10px;color:var(--text3);margin-top:2px;">15 грудня 2024</div></div><div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);">850 ₴</div></div>
+          <div style="padding:8px 0;text-align:center;font-size:11px;color:var(--gold);cursor:pointer;">Показати всі 12 візитів →</div>
+        </div>
+        <button style="width:100%;margin-top:10px;padding:14px;background:linear-gradient(135deg,#9B7FD4,#6B4FD4);border:none;border-radius:14px;color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">📅 Записати знову</button>
+        <div style="height:30px;"></div>
+      </div>
+    </div>
+
+    <!-- MASTER SERVICES -->
+    <div class="screen" id="m-services">
+      <div class="s-svc-hdr">
+        <div class="sb" style="padding:0;height:auto;margin-bottom:14px;"><span>9:41</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <button class="chat-back" onclick="mGoTo('m-profile')">←</button>
+            <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--text)">Мої послуги</div>
+          </div>
+          <button class="btn btn-ghost" style="font-size:11px;padding:8px 14px;">+ Додати</button>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="svc-cat-name">Нігті</div>
+        <div class="svc-row"><div class="sr-ico" style="background:var(--violet-bg)">💅</div><div class="sr-info"><div class="sr-name">Манікюр класичний</div><div class="sr-meta">⏱ 60 хв · Тільки я</div></div><div class="sr-price" style="color:var(--violet)">280 ₴</div><div class="sr-edit">⋯</div></div>
+        <div class="svc-row"><div class="sr-ico" style="background:var(--violet-bg)">💎</div><div class="sr-info"><div class="sr-name">Гель-лак</div><div class="sr-meta">⏱ 90 хв · Найпопулярніше</div></div><div class="sr-price" style="color:var(--violet)">420 ₴</div><div class="sr-edit">⋯</div></div>
+        <div class="svc-row"><div class="sr-ico">✨</div><div class="sr-info"><div class="sr-name">Нарощування нігтів</div><div class="sr-meta">⏱ 150 хв</div></div><div class="sr-price" style="color:var(--gold)">850 ₴</div><div class="sr-edit">⋯</div></div>
+        <div class="svc-row"><div class="sr-ico">🎨</div><div class="sr-info"><div class="sr-name">Nail-art дизайн</div><div class="sr-meta">⏱ 30 хв · Доповнення</div></div><div class="sr-price" style="color:var(--gold)">150 ₴</div><div class="sr-edit">⋯</div></div>
+        <div class="svc-cat-name">Педикюр</div>
+        <div class="svc-row"><div class="sr-ico">🦶</div><div class="sr-info"><div class="sr-name">Педикюр класичний</div><div class="sr-meta">⏱ 75 хв</div></div><div class="sr-price" style="color:var(--gold)">350 ₴</div><div class="sr-edit">⋯</div></div>
+        <div class="svc-row"><div class="sr-ico">💅</div><div class="sr-info"><div class="sr-name">Педикюр + гель-лак</div><div class="sr-meta">⏱ 105 хв</div></div><div class="sr-price" style="color:var(--gold)">520 ₴</div><div class="sr-edit">⋯</div></div>
+        <button class="add-svc-btn">+ Додати нову послугу</button>
+        <div style="height:40px;"></div>
+      </div>
+    </div>
+
+  </div><!-- /master phone -->
+</div><!-- /master phone-wrap -->
+
+<script>
+// ── SALON NAVIGATION ──
+const SALON_SCREENS = ['s-splash','s-dash','s-calendar','s-team','s-stats','s-chat','s-chat-conv','s-profile','s-services'];
+function sGoTo(id) {
+  SALON_SCREENS.forEach(s => {
+    const el = document.getElementById(s);
+    if (el) { el.classList.remove('active'); }
+  });
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+}
+
+// ── MASTER NAVIGATION ──
+const MASTER_SCREENS = ['m-splash','m-dash','m-calendar','m-stats','m-chat','m-chat-conv','m-profile','m-services','m-client-detail'];
+function mGoTo(id) {
+  MASTER_SCREENS.forEach(s => {
+    const el = document.getElementById(s);
+    if (el) { el.classList.remove('active'); }
+  });
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+}
+
+// ── PROFILE TAB SWITCH ──
+function switchProfTab(tab) {
+  ['info','schedule','clients','waitlist'].forEach(t => {
+    const body = document.getElementById('ptab-' + t);
+    const btn  = document.getElementById('pst-' + t);
+    if (body) body.style.display = t === tab ? 'block' : 'none';
+    if (btn)  btn.classList.toggle('on', t === tab);
+  });
+}
+
+// ── SCHEDULE: BUFFER PILLS ──
+function selBuffer(el) {
+  el.closest('.sched-card').querySelectorAll('.buffer-pill').forEach(p => p.classList.remove('on'));
+  el.classList.add('on');
+}
+
+// ── SCHEDULE: TOGGLE DAY ON/OFF ──
+function toggleDay(id) {
+  const row = document.getElementById(id);
+  if (!row) return;
+  const sw    = row.querySelector('.day-switch');
+  const tog   = row.querySelector('.day-toggle');
+  const hours = row.querySelector('.day-hours');
+  const isOn  = sw.classList.contains('on');
+  sw.classList.toggle('on', !isOn);
+  tog.classList.toggle('on', !isOn);
+  row.classList.toggle('off', isOn);
+  if (hours) {
+    if (isOn) {
+      hours.innerHTML = '<span style="font-size:11px;color:var(--text3);">Вихідний</span>';
+      hours.classList.add('off-hours');
+    } else {
+      hours.innerHTML = '<input class="time-inp" value="09:00"><span style="color:var(--text3);">—</span><input class="time-inp" value="19:00">';
+      hours.classList.remove('off-hours');
+    }
+  }
+}
+
+// ── SCHEDULE: CHANGE SERVICE DURATION ──
+function changeDur(btn, delta) {
+  const row = btn.closest('.svc-dur-row');
+  const valEl = row.querySelector('.dur-val');
+  let v = parseInt(valEl.textContent) + delta;
+  if (v < 10) v = 10;
+  if (v > 300) v = 300;
+  valEl.textContent = v;
+  // flash
+  valEl.style.color = delta > 0 ? 'var(--sage)' : 'var(--rose)';
+  setTimeout(() => { valEl.style.color = 'var(--text)'; }, 350);
+}
+
+// ── SCHEDULE: TOGGLE BLOCKED DATE ──
+function toggleBlock(el) {
+  if (el.classList.contains('blocked')) {
+    el.classList.remove('blocked');
+    el.classList.add('avail');
+  } else if (el.classList.contains('avail')) {
+    el.classList.remove('avail');
+    el.classList.add('blocked');
+  }
+}
+
+// ── CLIENTS: FILTER PILLS ──
+document.addEventListener('click', e => {
+  const pill = e.target.closest('.client-filter-pill');
+  if (!pill) return;
+  const group = pill.closest('div');
+  group.querySelectorAll('.client-filter-pill').forEach(p => p.classList.remove('on'));
+  pill.classList.add('on');
+});
+
+// ── WAITLIST: ACCEPT / DECLINE ──
+function acceptWaitlist(btn) {
+  const card = btn.closest('.wl-card');
+  card.style.transition = 'all .3s';
+  card.style.borderColor = 'var(--sage)';
+  card.style.background = 'rgba(111,175,136,.06)';
+  btn.textContent = '✓ Записано!';
+  btn.style.background = 'var(--sage)';
+  setTimeout(() => { card.classList.add('done'); }, 900);
+}
+function declineWaitlist(btn) {
+  const card = btn.closest('.wl-card');
+  card.style.transition = 'all .3s';
+  card.style.opacity = '0';
+  card.style.transform = 'translateX(30px)';
+  setTimeout(() => { card.style.display = 'none'; }, 350);
+}
+
+// ── CALENDAR: TAB SWITCH (General / Per-Master) ──
+function switchCalTab(tab) {
+  const allView   = document.getElementById('cal-view-all');
+  const mastersView = document.getElementById('cal-view-masters');
+  const tabAll    = document.getElementById('tab-all');
+  const tabMasters = document.getElementById('tab-masters');
+  if (tab === 'all') {
+    allView.style.display = 'block';
+    mastersView.style.display = 'none';
+    tabAll.classList.add('on');
+    tabMasters.classList.remove('on');
+  } else {
+    allView.style.display = 'none';
+    mastersView.style.display = 'flex';
+    tabAll.classList.remove('on');
+    tabMasters.classList.add('on');
+  }
+}
+
+// ── CALENDAR: WEEK DAY SELECT ──
+function selCalDay(el) {
+  const parent = el.closest('.cal-week');
+  parent.querySelectorAll('.cw-day').forEach(d => d.classList.remove('on'));
+  el.classList.add('on');
+}
+// alias for master calendar (same function)
+function selDay(el) { selCalDay(el); }
+
+// ── CALENDAR: MASTER TAB SELECT ──
+function selMasterTab(el, colId) {
+  document.querySelectorAll('#master-tab-row .master-col-tab').forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.master-col').forEach(c => c.style.display = 'none');
+  const col = document.getElementById(colId);
+  if (col) col.style.display = 'block';
+}
+
+// ── SEQUENTIAL BOOKING TOGGLE ──
+let seqMode = false;
+function toggleSeqMode() {
+  seqMode = !seqMode;
+  const toggle = document.getElementById('seq-toggle');
+  const knob   = document.getElementById('seq-knob');
+  const panel  = document.getElementById('seq-panel');
+  const c1 = document.getElementById('seq-chain-1');
+  const c2 = document.getElementById('seq-chain-2');
+  toggle.style.background = seqMode ? 'var(--gold)' : 'var(--bg4)';
+  knob.style.left          = seqMode ? '16px' : '2px';
+  knob.style.background    = seqMode ? '#fff' : 'var(--text3)';
+  panel.style.display      = seqMode ? 'block' : 'none';
+  if (c1) c1.style.display = seqMode ? 'block' : 'none';
+  if (c2) c2.style.display = seqMode ? 'block' : 'none';
+}
+
+// ── SLOT BOOKING MODAL ──
+function openSlot(master, time) {
+  const modal = document.getElementById('slot-modal');
+  const info  = document.getElementById('modal-slot-info');
+  if (info) info.textContent = `👤 ${master} · ⏰ ${time} · 28 лютого`;
+  if (modal) modal.style.display = 'flex';
+}
+function closeSlotModal() {
+  const modal = document.getElementById('slot-modal');
+  if (modal) modal.style.display = 'none';
+}
+function openNewBooking() { openSlot('Будь-який майстер', 'Оберіть час'); }
+
+// ── PERIOD TABS ──
+document.querySelectorAll('.ptab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    this.closest('.period-tabs').querySelectorAll('.ptab').forEach(t => t.classList.remove('on'));
+    this.classList.add('on');
+  });
+});
+</script>
+</body>
+</html>
